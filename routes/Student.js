@@ -3,8 +3,8 @@ var router = express.Router();
 var Student = require("../models/Student");
 const upload = require("../helpers/multer-helper");
 const StatusTask = require('../models/Status_Task');
- const {sendNotifToTopicRestAPI} = require('../helpers/firebase');
- const axios = require('axios'); 
+const { sendNotifToTopicRestAPI } = require('../helpers/firebase');
+const axios = require('axios');
 
 // router.post('/Save_Student/',function(req,res,next)
 // {
@@ -31,518 +31,418 @@ const StatusTask = require('../models/Status_Task');
 // });
 
 
-router.get('/Load_Enquiryfor/',function(req,res,next)
-{ 
-try 
-{
-	Student.Load_Enquiryfor(function (err, rows) 
-{
-if (err) 
-{
- 
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-  
-}
-finally 
-{
-}
+router.get('/Load_Enquiryfor/', function (req, res, next) {
+	try {
+		Student.Load_Enquiryfor(function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
 });
 
 router.get("/Get_FollowUp_History_Withdate/:Student_Id_?", async (req, res, next) => {
 	try {
-	  const result = await Student.Get_FollowUp_History_Withdate(req.params.Student_Id_);
-	  res.json(result);
+		const result = await Student.Get_FollowUp_History_Withdate(req.params.Student_Id_);
+		res.json(result);
 	} catch (e) {
-	  res.send(e);
+		res.send(e);
 	} finally {
 	}
-  });
-
-router.post('/Save_Qualification/',function(req,res,next)
-{ 
-try 
-{
-    Student.Save_Qualification(req.body, function (err, rows) 
-{
-if (err) 
-{
-	
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-	
-}
-finally 
-{
-}
 });
 
-router.get('/Delete_Qualificationdetails/:Qualification_Id_?',function(req,res,next)
- { 
- try 
- {
-    Student.Delete_Qualificationdetails(req.params.Qualification_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.post('/Save_Qualification/', function (req, res, next) {
+	try {
+		Student.Save_Qualification(req.body, function (err, rows) {
+			if (err) {
 
-  router.get('/Delete_Pre_Visa/:Student_Checklist_Master_Id_?',function(req,res,next)
- { 
- try 
- {
-    Student.Delete_Pre_Visa(req.params.Student_Checklist_Master_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+router.get('/Delete_Qualificationdetails/:Qualification_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Qualificationdetails(req.params.Qualification_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Delete_Pre_Visa/:Student_Checklist_Master_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Pre_Visa(req.params.Student_Checklist_Master_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
-  router.get('/Delete_Pre_Admission/:Student_Preadmission_Checklist_Master_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-	 Student.Delete_Pre_Admission(req.params.Student_Preadmission_Checklist_Master_Id_, function (err, rows) 
-  {
-   if (err) 
-   {
-   res.json(err);
-   }
-   else 
-   {
-	 res.json(rows);
-   }
-   });
-   }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-   });
- 
-  router.get('/Delete_Review/:Review_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-	 Student.Delete_Review(req.params.Review_Id_, function (err, rows) 
-  {
-   if (err) 
-   {
-   res.json(err);
-   }
-   else 
-   {
-	 res.json(rows);
-   }
-   });
-   }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-   });
+router.get('/Delete_Pre_Admission/:Student_Preadmission_Checklist_Master_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Pre_Admission(req.params.Student_Preadmission_Checklist_Master_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
-router.get('/Get_QualificationDetails/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-	   
-    Student.Get_QualificationDetails(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Delete_Review/:Review_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Review(req.params.Review_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Get_QualificationDetails/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_QualificationDetails(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
 
- router.get('/Load_Conditions_Subdata_Edit/:Application_details_Id_?',function(req,res,next)
-{ 
+router.get('/Load_Conditions_Subdata_Edit/:Application_details_Id_?', function (req, res, next) {
 	// console.log(req);
-try 
-{
-	   
-    Student.Load_Conditions_Subdata_Edit(req.params.Application_details_Id_, function (err, rows) 
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+	try {
 
+		Student.Load_Conditions_Subdata_Edit(req.params.Application_details_Id_, function (err, rows) {
+			if (err) {
 
- router.get('/Get_Previsa_Details/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-	
-    Student.Get_Previsa_Details(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
-
- 
- router.get('/Get_Preadmission_Details/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-	
-    Student.Get_Preadmission_Details(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
-
- router.get('/Get_ReviewDetails/:Student_Id_?',function(req,res,next)
- { 
- try 
- {
-	 
-	 Student.Get_ReviewDetails(req.params.Student_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-	 
-  res.json(err);
-  }
-  else 
-  {
-	res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
-
- router.post('/Save_work_experience/',function(req,res,next)
-{ 
-try 
-{
-    Student.Save_work_experience(req.body, function (err, rows) 
-{
-if (err) 
-{
-    
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
- 
-}
-finally 
-{
-}
-});
-
-router.post('/Save_Leave_Management/',function(req,res,next)
-{ 
-try 
-{
- Student.Save_Leave_Management(req.body, function (err, rows) 
-{
-if (err) 
-{
-
-res.json(err);
-console.log('err: ', err);
-}
-else 
-{
-	console.log('rows: ', rows);
-res.json(rows);
-
-}
-});
-}
-catch (e) 
-
-{
-	console.log('e: ', e);
-}
-finally 
-{
-}
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
 });
 
 
-router.post('/Save_Cas_Followup/',function(req,res,next)
-{ 
-try 
-{
- Student.Save_Cas_Followup(req.body, function (err, rows) 
-{
-if (err) 
-{
+router.get('/Get_Previsa_Details/:Student_Id_?', function (req, res, next) {
+	try {
 
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
+		Student.Get_Previsa_Details(req.params.Student_Id_, function (err, rows) {
+			if (err) {
 
-}
-finally 
-{
-}
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
 });
 
-router.post('/Save_Profile/',function(req,res,next)
-{ 
+
+router.get('/Get_Preadmission_Details/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Preadmission_Details(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Get_ReviewDetails/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_ReviewDetails(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.post('/Save_work_experience/', function (req, res, next) {
+	try {
+		Student.Save_work_experience(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+router.post('/Save_Leave_Management/', function (req, res, next) {
+	try {
+		Student.Save_Leave_Management(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+				console.log('err: ', err);
+			}
+			else {
+				console.log('rows: ', rows);
+				res.json(rows);
+
+			}
+		});
+	}
+	catch (e) {
+		console.log('e: ', e);
+	}
+	finally {
+	}
+});
+
+
+router.post('/Save_Cas_Followup/', function (req, res, next) {
+	try {
+		Student.Save_Cas_Followup(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+router.get('/Get_Todays_Notifications/:User_Id_?', function (req, res, next) {
+	try {
+		console.log('req.params.User_Id_: ', req.params.User_Id_);
+
+		Student.Get_Todays_Notifications(req.params.User_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+		console.log(e);
+	}
+	finally {
+	}
+});
+router.post('/Save_Profile/', function (req, res, next) {
 
 	const io = req.app.get('io');
 
-try 
-{
- Student.Save_Profile(req.body, async function (err, rows) 
-{
-if (err) 
-{
-console.log(err);
-res.json(err);
-}
-else 
-{
-res.json(rows);
-console.log('rows: ', rows);
+	try {
+		Student.Save_Profile(req.body, async function (err, rows) {
+			if (err) {
+				console.log(err);
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+				console.log('rows: ', rows);
 
-var t = req.body;
+				var t = req.body;
 
-	if(t.Student_Id <=0)
-		{
+				if (t.Student_Id <= 0) {
 
-			var notificationData = rows[2];
-			console.log('notificationData: ', notificationData);
-		
+					var notificationData = rows[2];
+					console.log('notificationData: ', notificationData);
 
-			if(notificationData.length)
-				{
-					let notificationUserId = notificationData[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
-					let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
-					var not={
-						Student_Name: notificationData[0].Student_Name,
-						From_User_Name: notificationData[0].From_User_Name,
-						Notification_Type_Name: notificationData[0].Description,
-						Entry_Type: notificationData[0].Entry_Type,
-						To_User: notificationData[0].To_User,
-						Notification_Id: notificationData[0].Notification_Id,
-						Student_Id: notificationData[0].Student_Id,
-						User_Id: user_ids,
-					}   
-					console.log('not: ', not);
-					console.log('Sending notification:', JSON.stringify(not, null, 2));
-					try {
-						const result = await axios.post(process.env.socketUrl, not);
-						console.log('result: ', result.data);
-					} catch (error) {
-						console.log('error: ', error);
-						
+
+					if (notificationData.length) {
+						let notificationUserId = notificationData[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
+						let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
+						var not = {
+							Student_Name: notificationData[0].Student_Name,
+							From_User_Name: notificationData[0].From_User_Name,
+							Notification_Type_Name: notificationData[0].Description,
+							Entry_Type: notificationData[0].Entry_Type,
+							To_User: notificationData[0].To_User,
+							Notification_Id: notificationData[0].Notification_Id,
+							Student_Id: notificationData[0].Student_Id,
+							User_Id: user_ids,
+						}
+						console.log('not: ', not);
+						console.log('Sending notification:', JSON.stringify(not, null, 2));
+						try {
+							const result = await axios.post(process.env.socketUrl, not);
+							console.log('result: ', result.data);
+						} catch (error) {
+							console.log('error: ', error);
+
+						}
+
 					}
-			
+
 				}
-		
-		}
 
-}
+			}
+		});
+	}
+	catch (e) {
+		console.log(e);
+	}
+	finally {
+	}
 });
-}
-catch (e) 
-{
-console.log(e);
-}
-finally  
-{
-}
-});
-router.post('/Save_profile_Agentside/',function(req,res,next)
-{ 
-try 
-{
- Student.Save_profile_Agentside(req.body, async function (err, rows) 
-{
-if (err) 
-{
-console.log(err);
-res.json(err);
+router.post('/Save_profile_Agentside/', function (req, res, next) {
+	try {
+		Student.Save_profile_Agentside(req.body, async function (err, rows) {
+			if (err) {
+				console.log(err);
+				res.json(err);
 
-}
-else 
-{
-	var t = req.body;
+			}
+			else {
+				var t = req.body;
 
-	if(t.Student_Id <=0)
-		{
+				if (t.Student_Id <= 0) {
 
-			var notificationData = rows[2];
-			console.log('notificationData: ', notificationData);
-		
+					var notificationData = rows[2];
+					console.log('notificationData: ', notificationData);
 
-			if(notificationData.length)
-				{
-					let notificationUserId = notificationData[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
-					let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
-					var not={
-						Student_Name: notificationData[0].Student_Name,
-						From_User_Name: notificationData[0].From_User_Name,
-						Notification_Type_Name: notificationData[0].Description,
-						Entry_Type: notificationData[0].Entry_Type,
-						To_User: notificationData[0].To_User,
-						Notification_Id: notificationData[0].Notification_Id,
-						Student_Id: notificationData[0].Student_Id,
-						User_Id: user_ids,
-					}   
-					console.log('rocess.env.socketUrl: ', process.env.socketUrl);
-					console.log('not: ', not);
-					try {
-						const result = await axios.post(process.env.socketUrl, not);
-						console.log('result: ', result.data);
-					} catch (error) {
-						console.log('error: ', error);
-						
+
+					if (notificationData.length) {
+						let notificationUserId = notificationData[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
+						let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
+						var not = {
+							Student_Name: notificationData[0].Student_Name,
+							From_User_Name: notificationData[0].From_User_Name,
+							Notification_Type_Name: notificationData[0].Description,
+							Entry_Type: notificationData[0].Entry_Type,
+							To_User: notificationData[0].To_User,
+							Notification_Id: notificationData[0].Notification_Id,
+							Student_Id: notificationData[0].Student_Id,
+							User_Id: user_ids,
+						}
+						console.log('rocess.env.socketUrl: ', process.env.socketUrl);
+						console.log('not: ', not);
+						try {
+							const result = await axios.post(process.env.socketUrl, not);
+							console.log('result: ', result.data);
+						} catch (error) {
+							console.log('error: ', error);
+
+						}
+
 					}
-			
+
 				}
-		
-		}
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-console.log(e);
-}
-finally 
-{
-}
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+		console.log(e);
+	}
+	finally {
+	}
 });
 
 
 
 router.get("/Close_Open_Agent_Student/:Student_Id_?/:Login_User_?/:Status_?", function (req, res, next) {
 	try {
-		Student.Close_Open_Agent_Student(req.params.Student_Id_,req.params.Login_User_,req.params.Status_, function (err, rows) {
+		Student.Close_Open_Agent_Student(req.params.Student_Id_, req.params.Login_User_, req.params.Status_, function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -557,253 +457,237 @@ router.get("/Close_Open_Agent_Student/:Student_Id_?/:Login_User_?/:Status_?", fu
 
 router.post('/Withdraw_Amount_Save/', function (req, res, next) {
 	try {
-	  // Access the query parameters instead of req.body
-	  const { Amount, By_User_Id, Description } = req.query;
-  
-	  // Call the Withdraw_Amount_Save function and pass the query parameters
-	  Student.Withdraw_Amount_Save({ Amount, By_User_Id, Description }, function (err, rows) {
-		console.log('Query parameters: ', req.query);
-		if (err) {
-		  console.log(err);
-		  res.json(err); // Respond with the error
-		} else {
-		  res.json(rows); // Respond with the result rows
-		}
-	  });
-	} catch (e) {
-	  console.log(e); // Log any exception
-	  res.status(500).json({ error: "An error occurred" });
-	} finally {
-	  // You can handle any cleanup here if necessary
-	}
-  });
-  
-  
-router.post('/Save_Profile_Agent/',function(req,res,next)
-{ 
-	const io = req.app.get('io');
+		// Access the query parameters instead of req.body
+		const { Amount, By_User_Id, Description } = req.query;
 
-try 
-{
-	console.log('req.query: ', req.query);
- Student.Save_Profile_Agent(req.query, async function (err, rows) 
-{
-if (err) 
-{
-console.log(err);
-res.json(err);
-}
-else 
-{
-	console.log('rows: ', rows);
-	res.json(rows);
-
-	var t = rows[1];
-	console.log('t: ', t);
-	console.log(' t[0]: ',  t[0]);
-	
-	if(t.length)
-	{
-		let notificationUserId = t[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
-		let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
-		console.log(' t[1]: ',  t[1]);
-		var not={
-			Student_Name: t[0].Student_Name,
-			From_User_Name: t[0].From_User_Name,
-			Notification_Type_Name: t[0].Description,
-			Entry_Type: t[0].Entry_Type,
-			To_User: t[0].To_User,
-			Notification_Id: t[0].Notification_Id,
-			Student_Id: t[0].Student_Id,
-			User_Id: user_ids,
-		}   
-		console.log('not: ', not);
-		try {
-			const result = await axios.post(process.env.socketUrl, not);
-			console.log('result: ', result.data);
-		} catch (error) {
-			console.log('error: ', error);
-			
-		}
-
-	}
-	}
-});
-}
-catch (e) 
-{
-console.log(e);
-}
-finally 
-{
-}
-});
-
-
-
-router.post('/Edit_Profile_Agent/',function(req,res,next)
-{ 
-	const io = req.app.get('io');
-try 
-{
-	console.log(req.query)
- Student.Edit_Profile_Agent(req.query, async function (err, rows) 
- {
-	if (err) 
-	{
-	console.log(err);
-	res.json(err);
-	}
-	else 
-	{
-		console.log('rows: ', rows);
-		res.json(rows);
-	
-		var t = rows[1];
-		console.log('t: ', t);
-		console.log(' t[0]: ',  t[0]);
-		if(t.length)
-		{
-	
-			var not={
-				Student_Name: t[0].Student_Name,
-				From_User_Name: t[0].From_User_Name,
-				Notification_Type_Name: t[0].Description,
-				Entry_Type: t[0].Entry_Type,
-				To_User: t[0].To_User,
-				Notification_Id: t[0].Notification_Id,
-				Student_Id: t[0].Student_Id,
-			}   
-			console.log('not: ', not);
-			try {
-				const result = await axios.post(process.env.socketUrl, not);
-				console.log('result: ', result.data);
-			} catch (error) {
-				console.log('error: ', error);
-				
+		// Call the Withdraw_Amount_Save function and pass the query parameters
+		Student.Withdraw_Amount_Save({ Amount, By_User_Id, Description }, function (err, rows) {
+			console.log('Query parameters: ', req.query);
+			if (err) {
+				console.log(err);
+				res.json(err); // Respond with the error
+			} else {
+				res.json(rows); // Respond with the result rows
 			}
-		}
-		}
-	});
+		});
+	} catch (e) {
+		console.log(e); // Log any exception
+		res.status(500).json({ error: "An error occurred" });
+	} finally {
+		// You can handle any cleanup here if necessary
 	}
-	catch (e) 
-	{
-	console.log(e);
+});
+
+
+router.post('/Save_Profile_Agent/', function (req, res, next) {
+	const io = req.app.get('io');
+
+	try {
+		console.log('req.query: ', req.query);
+		Student.Save_Profile_Agent(req.query, async function (err, rows) {
+			if (err) {
+				console.log(err);
+				res.json(err);
+			}
+			else {
+				console.log('rows: ', rows);
+				res.json(rows);
+
+				var t = rows[1];
+				console.log('t: ', t);
+				console.log(' t[0]: ', t[0]);
+
+				if (t.length) {
+					let notificationUserId = t[0].Notificaion_User_Id_; // Example input: "199,151,386,426"
+					let user_ids = notificationUserId.split(',').map(Number); // Split and convert to numbers
+					console.log(' t[1]: ', t[1]);
+					var not = {
+						Student_Name: t[0].Student_Name,
+						From_User_Name: t[0].From_User_Name,
+						Notification_Type_Name: t[0].Description,
+						Entry_Type: t[0].Entry_Type,
+						To_User: t[0].To_User,
+						Notification_Id: t[0].Notification_Id,
+						Student_Id: t[0].Student_Id,
+						User_Id: user_ids,
+					}
+					console.log('not: ', not);
+					try {
+						const result = await axios.post(process.env.socketUrl, not);
+						console.log('result: ', result.data);
+					} catch (error) {
+						console.log('error: ', error);
+
+					}
+
+				}
+			}
+		});
 	}
-	finally 
-	{
-	}
-	});
-router.get("/Search_Profile_Agent/", function (req, res, next) {
-    try {
-		
-	console.log(req.query)
-        Student.Search_Profile_Agent(
-            req.query.By_User_Id_,
-            function (err, rows) {
-                if (err) {
-					console.log(err);
-                    res.json(err);
-                } else {
-					
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
+	catch (e) {
 		console.log(e);
-    } finally {
-    }
+	}
+	finally {
+	}
+});
+
+
+
+router.post('/Edit_Profile_Agent/', function (req, res, next) {
+	const io = req.app.get('io');
+	try {
+		console.log(req.query)
+		Student.Edit_Profile_Agent(req.query, async function (err, rows) {
+			if (err) {
+				console.log(err);
+				res.json(err);
+			}
+			else {
+				console.log('rows: ', rows);
+				res.json(rows);
+
+				var t = rows[1];
+				console.log('t: ', t);
+				console.log(' t[0]: ', t[0]);
+				if (t.length) {
+
+					var not = {
+						Student_Name: t[0].Student_Name,
+						From_User_Name: t[0].From_User_Name,
+						Notification_Type_Name: t[0].Description,
+						Entry_Type: t[0].Entry_Type,
+						To_User: t[0].To_User,
+						Notification_Id: t[0].Notification_Id,
+						Student_Id: t[0].Student_Id,
+					}
+					console.log('not: ', not);
+					try {
+						const result = await axios.post(process.env.socketUrl, not);
+						console.log('result: ', result.data);
+					} catch (error) {
+						console.log('error: ', error);
+
+					}
+				}
+			}
+		});
+	}
+	catch (e) {
+		console.log(e);
+	}
+	finally {
+	}
+});
+router.get("/Search_Profile_Agent/", function (req, res, next) {
+	try {
+
+		console.log(req.query)
+		Student.Search_Profile_Agent(
+			req.query.By_User_Id_,
+			function (err, rows) {
+				if (err) {
+					console.log(err);
+					res.json(err);
+				} else {
+
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
+		console.log(e);
+	} finally {
+	}
 });
 router.get("/Search_Profile_Agent_transfered/", function (req, res, next) {
-    try {
-		
-	console.log(req.query)
-        Student.Search_Profile_Agent_transfered(
-            req.query.By_User_Id_,
-            function (err, rows) {
-                if (err) {
+	try {
+
+		console.log(req.query)
+		Student.Search_Profile_Agent_transfered(
+			req.query.By_User_Id_,
+			function (err, rows) {
+				if (err) {
 					console.log(err);
-                    res.json(err);
-                } else {
-					
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
+					res.json(err);
+				} else {
+
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
 		console.log(e);
-    } finally {
-    }
+	} finally {
+	}
 });
 
 
 router.get("/Get_Withdraw_Details/", function (req, res, next) {
-    try {
-        console.log(req.query);  // Log the query parameters to check By_User_Id_
+	try {
+		console.log(req.query);  // Log the query parameters to check By_User_Id_
 
-        // Call the backend function and pass By_User_Id_ from req.query
-        Student.Get_Withdraw_Details(
-            req.query.By_User_Id_,   // Access By_User_Id_ from the query string
-            function (err, rows) {
-                if (err) {
-                    console.log(err);
-                    res.json(err);  // Return the error if any
-                } else {
-                    res.json(rows);  // Return the result rows
-                }
-            }
-        );
-    } catch (e) {
-        console.log(e);  // Log any exception that occurs
-        res.status(500).json({ error: "An error occurred" });  // Respond with error
-    } finally {
-        // Any final cleanup or actions (optional)
-    }
+		// Call the backend function and pass By_User_Id_ from req.query
+		Student.Get_Withdraw_Details(
+			req.query.By_User_Id_,   // Access By_User_Id_ from the query string
+			function (err, rows) {
+				if (err) {
+					console.log(err);
+					res.json(err);  // Return the error if any
+				} else {
+					res.json(rows);  // Return the result rows
+				}
+			}
+		);
+	} catch (e) {
+		console.log(e);  // Log any exception that occurs
+		res.status(500).json({ error: "An error occurred" });  // Respond with error
+	} finally {
+		// Any final cleanup or actions (optional)
+	}
 });
 
 
 router.get("/Search_Profile_freelancer/", function (req, res, next) {
-    try {
-		
-	console.log(req.query)
-        Student.Search_Profile_freelancer(
-            req.query.By_User_Id_,
-            function (err, rows) {
-                if (err) {
+	try {
+
+		console.log(req.query)
+		Student.Search_Profile_freelancer(
+			req.query.By_User_Id_,
+			function (err, rows) {
+				if (err) {
 					console.log(err);
-                    res.json(err);
-                } else {
-					
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
+					res.json(err);
+				} else {
+
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
 		console.log(e);
-    } finally {
-    }
+	} finally {
+	}
 });
 router.get("/Search_Profile_Agent_registerd/", function (req, res, next) {
-    try {
-		
-	console.log(req.query)
-        Student.Search_Profile_Agent_registerd(
-            req.query.By_User_Id_,
-            function (err, rows) {
-                if (err) {
+	try {
+
+		console.log(req.query)
+		Student.Search_Profile_Agent_registerd(
+			req.query.By_User_Id_,
+			function (err, rows) {
+				if (err) {
 					console.log(err);
-                    res.json(err);
-                } else {
-					
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
+					res.json(err);
+				} else {
+
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
 		console.log(e);
-    } finally {
-    }
+	} finally {
+	}
 });
 // router.post('/Transfer_Cofirmation/',function(req,res,next)
 // { 
@@ -831,164 +715,122 @@ router.get("/Search_Profile_Agent_registerd/", function (req, res, next) {
 // }
 // });
 
-router.post('/Save_Ielts_Details/',function(req,res,next)
-{ 
-try 
-{
-    Student.Save_Ielts_Details(req.body, function (err, rows) 
-{
-if (err) 
-{
-    
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-    
-}
-finally 
-{
-}
+router.post('/Save_Ielts_Details/', function (req, res, next) {
+	try {
+		Student.Save_Ielts_Details(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
 });
 
 
 
 
-router.get('/Delete_Workexperiencedetails/:Work_Experience_Id_?',function(req,res,next)
- { 
- try 
- {
- Student.Delete_Workexperiencedetails(req.params.Work_Experience_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.get('/Delete_Workexperiencedetails/:Work_Experience_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Workexperiencedetails(req.params.Work_Experience_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
-router.get('/Delete_Visa_Task/:Student_Task_Id?',function(req,res,next)
- { 
- try 
- {
- Student.Delete_Visa_Task(req.params.Student_Task_Id, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.get('/Delete_Visa_Task/:Student_Task_Id?', function (req, res, next) {
+	try {
+		Student.Delete_Visa_Task(req.params.Student_Task_Id, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
-router.get('/Delete_Ielts_Details/:Ielts_Details_Id_?',function(req,res,next)
- { 
- try 
- {
- Student.Delete_Ielts_Details(req.params.Ielts_Details_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.get('/Delete_Ielts_Details/:Ielts_Details_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Ielts_Details(req.params.Ielts_Details_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
-router.get('/Get_WorkexperienceDetails/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_WorkexperienceDetails(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Get_WorkexperienceDetails/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_WorkexperienceDetails(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
- router.get('/Get_Comments/:Application_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_Comments(req.params.Application_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Get_Comments/:Application_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Comments(req.params.Application_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
- router.get(
+router.get(
 	"/Load_ChatUser_Details/:Value_?/:Login_User_?",
 	function (req, res, next) {
 		try {
@@ -1010,112 +852,84 @@ finally
 );
 
 
- router.get('/Get_Visa_Task/:Student_Id_?/:Task_Group_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_Visa_Task(req.params.Student_Id_,req.params.Task_Group_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Get_Visa_Task/:Student_Id_?/:Task_Group_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Visa_Task(req.params.Student_Id_, req.params.Task_Group_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
- router.get('/Get_Previsa_Task/:Student_Id_?/:Task_Group_Id_?',function(req,res,next)
- { 
- try 
- {
-	    
-	 Student.Get_Previsa_Task(req.params.Student_Id_,req.params.Task_Group_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-	 
-  res.json(err);
-  }
-  else 
-  {
-	res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.get('/Get_Previsa_Task/:Student_Id_?/:Task_Group_Id_?', function (req, res, next) {
+	try {
 
-  router.get('/Get_Preadmission_Task/:Student_Id_?/:Task_Group_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-	     
-	  Student.Get_Preadmission_Task(req.params.Student_Id_,req.params.Task_Group_Id_, function (err, rows) 
-  {
-   if (err) 
-   {
-	  
-   res.json(err);
-   }
-   else 
-   {
-	 res.json(rows);
-   }
-   });
-   }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-   });
+		Student.Get_Previsa_Task(req.params.Student_Id_, req.params.Task_Group_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Get_Preadmission_Task/:Student_Id_?/:Task_Group_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Preadmission_Task(req.params.Student_Id_, req.params.Task_Group_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
 
- router.get('/Get_Task_History/:Student_Task_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_Task_History(req.params.Student_Task_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Get_Task_History/:Student_Task_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Task_History(req.params.Student_Task_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 //  router.get('/Search_Notification/:Login_User_?/:Page_Index1_?/:Page_Index2_?',function(req,res,next)
 // { 
@@ -1145,89 +959,82 @@ finally
 //  });
 
 router.get(
-    "/Search_Notification/:Login_User_?/:notification_type_?/:Sort_By_?/:search_name_?/:Page_Index1_?/:Page_Index2_?",
-    function (req, res, next) {
-        try {
-               ;
-            Student.Search_Notification(
-                req.params.Login_User_,
-                req.params.notification_type_,
+	"/Search_Notification/:Login_User_?/:notification_type_?/:Sort_By_?/:search_name_?/:Page_Index1_?/:Page_Index2_?",
+	function (req, res, next) {
+		try {
+			;
+			Student.Search_Notification(
+				req.params.Login_User_,
+				req.params.notification_type_,
 				req.params.Sort_By_,
 				req.params.search_name_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                function (err, rows) {
-                    if (err) {
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				function (err, rows) {
+					if (err) {
 						console.log('err: ', err);
-                        ;
-                        res.json(err);
-                    } else {
-                        res.json(rows);
-                    }
-                }
-            );
-        } catch (e) {
-            ;
-        } finally {
-        }
-    }
+						;
+						res.json(err);
+					} else {
+						res.json(rows);
+					}
+				}
+			);
+		} catch (e) {
+			;
+		} finally {
+		}
+	}
 );
 
- router.get('/SendLInk/:Student_Id_?/:Login_User_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.SendLInk(req.params.Student_Id_,req.params.Login_User_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
- router.post('/Move_To_Freelancer_Click/:Student_Id_?/:Login_User_Id_?', function(req, res, next) {
+router.get('/SendLInk/:Student_Id_?/:Login_User_Id_?', function (req, res, next) {
+	try {
+
+		Student.SendLInk(req.params.Student_Id_, req.params.Login_User_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+router.post('/Move_To_Freelancer_Click/:Student_Id_?/:Login_User_Id_?', function (req, res, next) {
 	try {
 		console.log('req.params.Student_Id_: ', req.params);
-	  Student.Move_To_Freelancer_Click(req.params.Student_Id_,req.params.Login_User_Id_, async function(err, rows) {
-		
-		if (err) {
-		  res.json(err);
-		} else {
-		  res.json(rows);
-		  console.log('rows: ', rows);
-		  if(rows[0][0].AffectedRows == 1){
-  
-			let data= {
-				type: 'Student_Rejected',
-				Student_Id: `${req.params.Student_Id_}`,
-				Student_Name: `${rows[0][0].Student_Name}`, // Added student name here
-				Created_By: `${rows[0][0].Created_By}`,
-			    message_content: `Student ${rows[0][0].Student_Name} Has Been Rejected`, 
-				timestamp: new Date().toISOString()
+		Student.Move_To_Freelancer_Click(req.params.Student_Id_, req.params.Login_User_Id_, async function (err, rows) {
+
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+				console.log('rows: ', rows);
+				if (rows[0][0].AffectedRows == 1) {
+
+					let data = {
+						type: 'Student_Rejected',
+						Student_Id: `${req.params.Student_Id_}`,
+						Student_Name: `${rows[0][0].Student_Name}`, // Added student name here
+						Created_By: `${rows[0][0].Created_By}`,
+						message_content: `Student ${rows[0][0].Student_Name} Has Been Rejected`,
+						timestamp: new Date().toISOString()
+					}
+					const SendNotifId = `EMP-freelancer-${rows[0][0].Created_By}`
+					await sendNotifToTopicRestAPI(SendNotifId, "New Message", `Student Has Been Rejected`, data);
+				}
 			}
-			const SendNotifId=`EMP-freelancer-${rows[0][0].Created_By}`
-	 		 await sendNotifToTopicRestAPI(SendNotifId, "New Message", `Student Has Been Rejected`, data);
-			  }
-		}
-	  });
+		});
 	} catch (e) {
-	  console.error('Error in Move_To_Freelancer_Click route:', e);
-	  res.status(500).json({ error: 'Internal Server Error' });
+		console.error('Error in Move_To_Freelancer_Click route:', e);
+		res.status(500).json({ error: 'Internal Server Error' });
 	}
-  });
+});
 
 //  router.get('/Load_Application_Fees_Dropdown/:Student_Id_?', function (req, res, next) {
 //     try {
@@ -1247,133 +1054,98 @@ finally
 //   });
 
 
-router.get('/Load_Application_Fees_Dropdown/:Student_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-    Student.Load_Application_Fees_Dropdown(req.params.Student_Id_, function (err, rows)
-  {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-  res.json(rows);
-  }
-  });
-  }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-  });
-
- router.get('/Get_Proceeding_Details/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_Proceeding_Details(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
-
- router.get('/Get_Ielts_Details/:Student_Id_?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.Get_Ielts_Details(req.params.Student_Id_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
-
-
-
-
-router.get('/Get_Student_PageLoadData_Dropdowns/',function(req,res,next)
-{ 
-try 
-{
-Student.Get_Student_PageLoadData_Dropdowns(function (err, rows)  
-{
-if (err) 
-{
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-}
-finally 
-{
-}
+router.get('/Load_Application_Fees_Dropdown/:Student_Id_?', function (req, res, next) {
+	try {
+		Student.Load_Application_Fees_Dropdown(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
 });
 
-router.get('/Load_Shore/',function(req,res,next)
-{ 
-try 
-{
-	Student.Load_Shore(function (err, rows) 
-{
-if (err) 
-{
- 
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
+router.get('/Get_Proceeding_Details/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Proceeding_Details(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
 });
-}
-catch (e) 
-{
-  
-}
-finally 
-{
-}
+
+router.get('/Get_Ielts_Details/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Ielts_Details(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+
+
+
+router.get('/Get_Student_PageLoadData_Dropdowns/', function (req, res, next) {
+	try {
+		Student.Get_Student_PageLoadData_Dropdowns(function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Load_Shore/', function (req, res, next) {
+	try {
+		Student.Load_Shore(function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
 });
 
 router.post("/Save_Student", upload.array("myFile"), (req, res, next) => {
@@ -1544,7 +1316,7 @@ router.post("/Save_Student", upload.array("myFile"), (req, res, next) => {
 				Dropbox_Link: req.body.Dropbox_Link,
 				No_of_Kids_and_Age: req.body.No_of_Kids_and_Age,
 				Previous_Visa_Rejection: req.body.Previous_Visa_Rejection,
-				
+
 
 
 				exp_tenure_from_1: req.body.exp_tenure_from_1,
@@ -1774,260 +1546,259 @@ router.post("/Save_Student", upload.array("myFile"), (req, res, next) => {
 
 
 router.post(
-    "/Save_ApplicationDetails_Datas",
-    upload.array("myFile"),
-    (req, res, next) => {
-        try {
-            const file = req.files;
+	"/Save_ApplicationDetails_Datas",
+	upload.array("myFile"),
+	(req, res, next) => {
+		try {
+			const file = req.files;
 
-            var Photo_ = [];
+			var Photo_ = [];
 
-            if (!file) {
-            } else {
-                var ApplicationDocument_Name_Temp = "";
-                var ApplicationFile_Name_Temp = "";
-                var index_Temp = 0;
-                for (
-                    var i = req.body.ApplicationDocument_File_Array;
-                    i < file.length;
-                    i++
-                ) {
-                    index_Temp = i - parseInt(req.body.ApplicationDocument_File_Array);
+			if (!file) {
+			} else {
+				var ApplicationDocument_Name_Temp = "";
+				var ApplicationFile_Name_Temp = "";
+				var index_Temp = 0;
+				for (
+					var i = req.body.ApplicationDocument_File_Array;
+					i < file.length;
+					i++
+				) {
+					index_Temp = i - parseInt(req.body.ApplicationDocument_File_Array);
 
-                    ApplicationDocument_Name_Temp =
-                        req.body["ApplicationDocument_Array" + index_Temp];
-                    ApplicationFile_Name_Temp =
-                        req.body["ApplicationDocument_File_Name" + index_Temp];
-                    Photo_.push({
-                        ApplicationFile_Name: file[i].filename,
-                        ApplicationDocument_Name: ApplicationDocument_Name_Temp,
-                        ApplicationDocument_File_Name: ApplicationFile_Name_Temp,
-                    });
-                }
+					ApplicationDocument_Name_Temp =
+						req.body["ApplicationDocument_Array" + index_Temp];
+					ApplicationFile_Name_Temp =
+						req.body["ApplicationDocument_File_Name" + index_Temp];
+					Photo_.push({
+						ApplicationFile_Name: file[i].filename,
+						ApplicationDocument_Name: ApplicationDocument_Name_Temp,
+						ApplicationDocument_File_Name: ApplicationFile_Name_Temp,
+					});
+				}
 
-                var Photo_json = JSON.stringify(Photo_);
+				var Photo_json = JSON.stringify(Photo_);
 
-                var Application1;
-                if (
-                    req.body.Country_Name != "" &&
-                    req.body.Country_Name != undefined &&
-                    req.body.Country_Name != null
-                ) {
-                    Application1 = {
-                        Application_details_Id: req.body.Application_details_Id,
-                        Student_Id: req.body.Student_Id,
-                        Country_Id: req.body.Country_Id,
-                        Country_Name: req.body.Country_Name,
-                        University_Id: req.body.University_Id,
-                        University_Name: req.body.University_Name,
-                        Course_Id: req.body.Course_Id,
-                        Course_Name: req.body.Course_Name,
+				var Application1;
+				if (
+					req.body.Country_Name != "" &&
+					req.body.Country_Name != undefined &&
+					req.body.Country_Name != null
+				) {
+					Application1 = {
+						Application_details_Id: req.body.Application_details_Id,
+						Student_Id: req.body.Student_Id,
+						Country_Id: req.body.Country_Id,
+						Country_Name: req.body.Country_Name,
+						University_Id: req.body.University_Id,
+						University_Name: req.body.University_Name,
+						Course_Id: req.body.Course_Id,
+						Course_Name: req.body.Course_Name,
 						Course_Link: req.body.Course_Link,
 						Application_Fees: req.body.Application_Fees,
-                        intake_Id: req.body.intake_Id,
-                        intake_Name: req.body.intake_Name,
-                        Intake_Year_Id: req.body.Intake_Year_Id,
-                        Intake_Year_Name: req.body.Intake_Year_Name,
-                        Date_Of_Applying: req.body.Date_Of_Applying,
-                        Remark: req.body.Remark,
-                        Application_status_Id: req.body.Application_status_Id,
-                        Application_Status_Name: req.body.Application_Status_Name,
-                        Agent_Id: req.body.Agent_Id,
-                        Agent_Name: req.body.Agent_Name,
-                        Reference_No: req.body.Reference_No,
-                        Activation_Status: req.body.Activation_Status,
-                        User_Id: req.body.User_Id,
-						
-                        Application_No: req.body.Application_No,
-                        Student_Reference_Id: req.body.Student_Reference_Id,
-                        Course_Fee:req.body.Course_Fee,
-                        Living_Expense:req.body.Living_Expense,
-						Preference:req.body.Preference,
-						Student_Approved_Status:req.body.Student_Approved_Status,
-						Bph_Approved_Status:req.body.Bph_Approved_Status,
+						intake_Id: req.body.intake_Id,
+						intake_Name: req.body.intake_Name,
+						Intake_Year_Id: req.body.Intake_Year_Id,
+						Intake_Year_Name: req.body.Intake_Year_Name,
+						Date_Of_Applying: req.body.Date_Of_Applying,
+						Remark: req.body.Remark,
+						Application_status_Id: req.body.Application_status_Id,
+						Application_Status_Name: req.body.Application_Status_Name,
+						Agent_Id: req.body.Agent_Id,
+						Agent_Name: req.body.Agent_Name,
+						Reference_No: req.body.Reference_No,
+						Activation_Status: req.body.Activation_Status,
+						User_Id: req.body.User_Id,
 
-						Portal_User_Name:req.body.Portal_User_Name,
-						Password:req.body.Password,
-						Offer_Student_Id:req.body.Offer_Student_Id,
-						Fees_Payment_Last_Date:req.body.Fees_Payment_Last_Date,
-						Feespaymentcheck:req.body.Feespaymentcheck,
-						Offer_Received:req.body.Offer_Received,
-						Duration_Id:req.body.Duration_Id,
-						url:req.body.url,
-                    };
-                }
+						Application_No: req.body.Application_No,
+						Student_Reference_Id: req.body.Student_Reference_Id,
+						Course_Fee: req.body.Course_Fee,
+						Living_Expense: req.body.Living_Expense,
+						Preference: req.body.Preference,
+						Student_Approved_Status: req.body.Student_Approved_Status,
+						Bph_Approved_Status: req.body.Bph_Approved_Status,
+
+						Portal_User_Name: req.body.Portal_User_Name,
+						Password: req.body.Password,
+						Offer_Student_Id: req.body.Offer_Student_Id,
+						Fees_Payment_Last_Date: req.body.Fees_Payment_Last_Date,
+						Feespaymentcheck: req.body.Feespaymentcheck,
+						Offer_Received: req.body.Offer_Received,
+						Duration_Id: req.body.Duration_Id,
+						url: req.body.url,
+					};
+				}
 				console.log(Application1);
-                var jsondata1 = JSON.stringify(Application1);
-                //console.log(Student1);
-                var Application_Data = {
-                    Application: jsondata1,
-                    application_document: Photo_json,
-                };
-                Student.Save_ApplicationDetails_Datas(
-                    Application_Data,
-                    function (err, rows) {
-                        if (err) {
-							console.log(err) ;
+				var jsondata1 = JSON.stringify(Application1);
+				//console.log(Student1);
+				var Application_Data = {
+					Application: jsondata1,
+					application_document: Photo_json,
+				};
+				Student.Save_ApplicationDetails_Datas(
+					Application_Data,
+					function (err, rows) {
+						if (err) {
+							console.log(err);
 
-                            return 1;
-                        } else {
-                            console.log(rows);
-                            return res.json(rows);
-                        }
-                    }
-                );
-            }
-        } catch (err) {
-            const error = new Error("Please upload a file");
-            error.httpStatusCode = 400;
-            return next(error);
-        } finally {
-        }
-    }
+							return 1;
+						} else {
+							console.log(rows);
+							return res.json(rows);
+						}
+					}
+				);
+			}
+		} catch (err) {
+			const error = new Error("Please upload a file");
+			error.httpStatusCode = 400;
+			return next(error);
+		} finally {
+		}
+	}
 );
 router.post(
-    "/Save_ApplicationDetails_Datas_Agent",
-    upload.array("myFile"),
-    (req, res, next) => {
-        try {
-            const file = req.files;
+	"/Save_ApplicationDetails_Datas_Agent",
+	upload.array("myFile"),
+	(req, res, next) => {
+		try {
+			const file = req.files;
 
-            var Photo_ = [];
+			var Photo_ = [];
 
-            if (!file) {
-            } else {
-                var ApplicationDocument_Name_Temp = "";
-                var ApplicationFile_Name_Temp = "";
-                var index_Temp = 0;
-                for (
-                    var i = req.body.ApplicationDocument_File_Array;
-                    i < file.length;
-                    i++
-                ) {
-                    index_Temp = i - parseInt(req.body.ApplicationDocument_File_Array);
+			if (!file) {
+			} else {
+				var ApplicationDocument_Name_Temp = "";
+				var ApplicationFile_Name_Temp = "";
+				var index_Temp = 0;
+				for (
+					var i = req.body.ApplicationDocument_File_Array;
+					i < file.length;
+					i++
+				) {
+					index_Temp = i - parseInt(req.body.ApplicationDocument_File_Array);
 
-                    ApplicationDocument_Name_Temp =
-                        req.body["ApplicationDocument_Array" + index_Temp];
-                    ApplicationFile_Name_Temp =
-                        req.body["ApplicationDocument_File_Name" + index_Temp];
-                    Photo_.push({
-                        ApplicationFile_Name: file[i].filename,
-                        ApplicationDocument_Name: ApplicationDocument_Name_Temp,
-                        ApplicationDocument_File_Name: ApplicationFile_Name_Temp,
-                    });
-                }
+					ApplicationDocument_Name_Temp =
+						req.body["ApplicationDocument_Array" + index_Temp];
+					ApplicationFile_Name_Temp =
+						req.body["ApplicationDocument_File_Name" + index_Temp];
+					Photo_.push({
+						ApplicationFile_Name: file[i].filename,
+						ApplicationDocument_Name: ApplicationDocument_Name_Temp,
+						ApplicationDocument_File_Name: ApplicationFile_Name_Temp,
+					});
+				}
 
-                var Photo_json = JSON.stringify(Photo_);
+				var Photo_json = JSON.stringify(Photo_);
 
-                var Application1;
-                if (
-                    req.body.Country_Name != "" &&
-                    req.body.Country_Name != undefined &&
-                    req.body.Country_Name != null
-                ) {
-                    Application1 = {
-                        Application_details_Id: req.body.Application_details_Id,
-                        Student_Id: req.body.Student_Id,
-                        Country_Id: req.body.Country_Id,
-                        Country_Name: req.body.Country_Name,
-                        University_Id: req.body.University_Id,
-                        University_Name: req.body.University_Name,
-                        Course_Id: req.body.Course_Id,
-                        Course_Name: req.body.Course_Name,
+				var Application1;
+				if (
+					req.body.Country_Name != "" &&
+					req.body.Country_Name != undefined &&
+					req.body.Country_Name != null
+				) {
+					Application1 = {
+						Application_details_Id: req.body.Application_details_Id,
+						Student_Id: req.body.Student_Id,
+						Country_Id: req.body.Country_Id,
+						Country_Name: req.body.Country_Name,
+						University_Id: req.body.University_Id,
+						University_Name: req.body.University_Name,
+						Course_Id: req.body.Course_Id,
+						Course_Name: req.body.Course_Name,
 						Course_Link: req.body.Course_Link,
 						Application_Fees: req.body.Application_Fees,
-                        intake_Id: req.body.intake_Id,
-                        intake_Name: req.body.intake_Name,
-                        Intake_Year_Id: req.body.Intake_Year_Id,
-                        Intake_Year_Name: req.body.Intake_Year_Name,
-                        Date_Of_Applying: req.body.Date_Of_Applying,
-                        Remark: req.body.Remark,
-                        Application_status_Id: req.body.Application_status_Id,
-                        Application_Status_Name: req.body.Application_Status_Name,
-                        Agent_Id: req.body.Agent_Id,
-                        Agent_Name: req.body.Agent_Name,
-                        Reference_No: req.body.Reference_No,
-                        Activation_Status: req.body.Activation_Status,
-                        User_Id: req.body.User_Id,
-						
-                        Application_No: req.body.Application_No,
-                        Student_Reference_Id: req.body.Student_Reference_Id,
-                        Course_Fee:req.body.Course_Fee,
-                        Living_Expense:req.body.Living_Expense,
-						Preference:req.body.Preference,
-						Student_Approved_Status:req.body.Student_Approved_Status,
-						Bph_Approved_Status:req.body.Bph_Approved_Status,
+						intake_Id: req.body.intake_Id,
+						intake_Name: req.body.intake_Name,
+						Intake_Year_Id: req.body.Intake_Year_Id,
+						Intake_Year_Name: req.body.Intake_Year_Name,
+						Date_Of_Applying: req.body.Date_Of_Applying,
+						Remark: req.body.Remark,
+						Application_status_Id: req.body.Application_status_Id,
+						Application_Status_Name: req.body.Application_Status_Name,
+						Agent_Id: req.body.Agent_Id,
+						Agent_Name: req.body.Agent_Name,
+						Reference_No: req.body.Reference_No,
+						Activation_Status: req.body.Activation_Status,
+						User_Id: req.body.User_Id,
 
-						Portal_User_Name:req.body.Portal_User_Name,
-						Password:req.body.Password,
-						Offer_Student_Id:req.body.Offer_Student_Id,
-						Fees_Payment_Last_Date:req.body.Fees_Payment_Last_Date,
-						Feespaymentcheck:req.body.Feespaymentcheck,
-						Offer_Received:req.body.Offer_Received,
-						Duration_Id:req.body.Duration_Id,
-						url:req.body.url,
-                    };
-                }
+						Application_No: req.body.Application_No,
+						Student_Reference_Id: req.body.Student_Reference_Id,
+						Course_Fee: req.body.Course_Fee,
+						Living_Expense: req.body.Living_Expense,
+						Preference: req.body.Preference,
+						Student_Approved_Status: req.body.Student_Approved_Status,
+						Bph_Approved_Status: req.body.Bph_Approved_Status,
+
+						Portal_User_Name: req.body.Portal_User_Name,
+						Password: req.body.Password,
+						Offer_Student_Id: req.body.Offer_Student_Id,
+						Fees_Payment_Last_Date: req.body.Fees_Payment_Last_Date,
+						Feespaymentcheck: req.body.Feespaymentcheck,
+						Offer_Received: req.body.Offer_Received,
+						Duration_Id: req.body.Duration_Id,
+						url: req.body.url,
+					};
+				}
 				console.log(Application1);
-                var jsondata1 = JSON.stringify(Application1);
-                //console.log(Student1);
-                var Application_Data = {
-                    Application: jsondata1,
-                    application_document: Photo_json,
-                };
-                Student.Save_ApplicationDetails_Datas_Agent(
-                    Application_Data,
-                    async function (err, rows) {
-                        if (err) {
-							console.log(err) ;
+				var jsondata1 = JSON.stringify(Application1);
+				//console.log(Student1);
+				var Application_Data = {
+					Application: jsondata1,
+					application_document: Photo_json,
+				};
+				Student.Save_ApplicationDetails_Datas_Agent(
+					Application_Data,
+					async function (err, rows) {
+						if (err) {
+							console.log(err);
 
-                            return 1;
-                        } else {
-                            console.log('rows agent',rows);
+							return 1;
+						} else {
+							console.log('rows agent', rows);
 
 
 
-							if(rows[0][0]. To_User_Id_ >0)
-								{
-									let notificationUserId = [rows[0][0]. To_User_Id_]; // Example input: [165]
-									let user_ids = notificationUserId.map(Number); // Convert array elements to numbers
-									var not={
-										Student_Name:  rows[0][0].Student_Name_,
-										From_User_Name:  rows[0][0].From_User_Name_,
-										Notification_Type_Name: 'Application Transferred',
-										Entry_Type:  rows[0][0].Entry_Type_,
-										To_User:  undefined,
-										Notification_Id:  rows[0][0].Notification_Id_,
-										Student_Id:  rows[0][0].Student_Id_,
-										User_Id: user_ids,
-									}   
-									console.log('not: ', not);
-									try {
-										const result = await axios.post(process.env.socketUrl, not);
-										console.log('result: ', result.data);
-									} catch (error) {
-										console.log('error: ', error);
-										
-									}
-							
+							if (rows[0][0].To_User_Id_ > 0) {
+								let notificationUserId = [rows[0][0].To_User_Id_]; // Example input: [165]
+								let user_ids = notificationUserId.map(Number); // Convert array elements to numbers
+								var not = {
+									Student_Name: rows[0][0].Student_Name_,
+									From_User_Name: rows[0][0].From_User_Name_,
+									Notification_Type_Name: 'Application Transferred',
+									Entry_Type: rows[0][0].Entry_Type_,
+									To_User: undefined,
+									Notification_Id: rows[0][0].Notification_Id_,
+									Student_Id: rows[0][0].Student_Id_,
+									User_Id: user_ids,
+								}
+								console.log('not: ', not);
+								try {
+									const result = await axios.post(process.env.socketUrl, not);
+									console.log('result: ', result.data);
+								} catch (error) {
+									console.log('error: ', error);
+
 								}
 
+							}
 
 
 
 
-                            return res.json(rows);
-                        }
-                    }
-                );
-            }
-        } catch (err) {
-            const error = new Error("Please upload a file");
-            error.httpStatusCode = 400;
-            return next(error);
-        } finally {
-        }
-    }
+
+							return res.json(rows);
+						}
+					}
+				);
+			}
+		} catch (err) {
+			const error = new Error("Please upload a file");
+			error.httpStatusCode = 400;
+			return next(error);
+		} finally {
+		}
+	}
 );
 
 router.post("/Save_FeesReceipt", upload.array("myFile"), (req, res, next) => {
@@ -2087,7 +1858,7 @@ router.post("/Save_FeesReceipt", upload.array("myFile"), (req, res, next) => {
 			//console.log(Student1);
 			var Fees_Data = { Fees: jsondata1, feesreceipt_document: Photo_json };
 			Student.Save_FeesReceipt(Fees_Data, async function (err, rows) {
-				
+
 				if (err) {
 					console.log(err);
 
@@ -2095,33 +1866,32 @@ router.post("/Save_FeesReceipt", upload.array("myFile"), (req, res, next) => {
 				} else {
 
 					console.log('rows: fees', rows[0][0]);
-					if(req.body.Fees_Receipt_Id==0)
-						{
-							let notificationUserId = [rows[0][0]. To_User_]; // Example input: [165]
-							let user_ids = notificationUserId.map(Number); // Convert array elements to numbers
-							var not={
-								Student_Name:  rows[0][0].Student_Name_,
-								From_User_Name:  rows[0][0].From_User_Name_,
-								Notification_Type_Name: 'Fees Receipt',
-								Entry_Type:  rows[0][0].Entry_Type_,
-								To_User:  undefined,
-								Notification_Id:  rows[0][0].Notification_Id_,
-								Student_Id:  rows[0][0].Student_Id_,
-								User_Id: user_ids,
-							}   
-							console.log('not: ', not);
-							console.log('process.env.socketUrl: ', process.env.socketUrl);
-							try {
-								const result = await axios.post(process.env.socketUrl, not);
-								console.log('result: ', result.data);
-							} catch (error) {
-								console.log('error: ', error);
-								
-							}
-					
+					if (req.body.Fees_Receipt_Id == 0) {
+						let notificationUserId = [rows[0][0].To_User_]; // Example input: [165]
+						let user_ids = notificationUserId.map(Number); // Convert array elements to numbers
+						var not = {
+							Student_Name: rows[0][0].Student_Name_,
+							From_User_Name: rows[0][0].From_User_Name_,
+							Notification_Type_Name: 'Fees Receipt',
+							Entry_Type: rows[0][0].Entry_Type_,
+							To_User: undefined,
+							Notification_Id: rows[0][0].Notification_Id_,
+							Student_Id: rows[0][0].Student_Id_,
+							User_Id: user_ids,
+						}
+						console.log('not: ', not);
+						console.log('process.env.socketUrl: ', process.env.socketUrl);
+						try {
+							const result = await axios.post(process.env.socketUrl, not);
+							console.log('result: ', result.data);
+						} catch (error) {
+							console.log('error: ', error);
+
 						}
 
-					
+					}
+
+
 					console.log(rows);
 					return res.json(rows);
 				}
@@ -2135,148 +1905,113 @@ router.post("/Save_FeesReceipt", upload.array("myFile"), (req, res, next) => {
 	}
 });
 
-router.post('/Save_Refund_Request/',function(req,res,next)
-{ 
-try 
-{
-    Student.Save_Refund_Request(req.body, function (err, rows) 
-{
- if (err) 
- {
- res.json(err);
- 
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-  
-}
-finally 
-{
-}
- });
+router.post('/Save_Refund_Request/', function (req, res, next) {
+	try {
+		Student.Save_Refund_Request(req.body, function (err, rows) {
+			if (err) {
+				res.json(err);
 
- router.get("/Get_Refundrequestdetails/:Student_Id_?/:Fees_Receipt_Id_?", function (req, res, next) {
-	    try {
-	        Student.Get_Refundrequestdetails(
-	            req.params.Student_Id_,req.params.Fees_Receipt_Id_,
-	            function (err, rows) {
-	                if (err) {
-	                    res.json(err);
-	                } else {
-	                    res.json(rows);
-	                }
-	            }
-	        );
-	    } catch (e) {
-	    } finally {
-	    }
-	});
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
 
-router.get('/Delete_Refund_Request/:Refund_Request_Id_?',function(req,res,next)
- { 
- try 
- {
-    Student.Delete_Refund_Request(req.params.Refund_Request_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
-	
-  router.post('/Save_pre_visa/',function(req,res,next)
-  { 
-  try 
-  {
-  Student.Save_pre_visa(req.body, function (err, rows) 
-  {
-  if (err) 
-  {
-  
-  res.json(err);
-  }
-  else 
-  {
-  res.json(rows);
-  }
-  });
-  }
-  catch (e) 
-  {
-   }
-  finally 
-  {
-  }
-  });
+	}
+	finally {
+	}
+});
 
-  router.post('/Save_Pre_Admission/',function(req,res,next)
-  { 
-  try 
-  {
-  Student.Save_Pre_Admission(req.body, function (err, rows) 
-  {
-  if (err) 
-  {
-  
-  res.json(err);
-  }
-  else 
-  {
-  res.json(rows);
-  }
-  });
-  }
-  catch (e) 
-  {
-   }
-  finally 
-  {
-  }
-  });
-  
-  router.post('/Save_Review/',function(req,res,next)
- { 
- try 
- {
-     Student.Save_Review(req.body, function (err, rows) 
- {
- if (err) 
- {
-     
- res.json(err);
- }
- else 
- {
- res.json(rows);
- }
- });
- }
- catch (e) 
- {
-     
- }
- finally 
- {
- }
- });
+router.get("/Get_Refundrequestdetails/:Student_Id_?/:Fees_Receipt_Id_?", function (req, res, next) {
+	try {
+		Student.Get_Refundrequestdetails(
+			req.params.Student_Id_, req.params.Fees_Receipt_Id_,
+			function (err, rows) {
+				if (err) {
+					res.json(err);
+				} else {
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
+	} finally {
+	}
+});
+
+router.get('/Delete_Refund_Request/:Refund_Request_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Refund_Request(req.params.Refund_Request_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.post('/Save_pre_visa/', function (req, res, next) {
+	try {
+		Student.Save_pre_visa(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.post('/Save_Pre_Admission/', function (req, res, next) {
+	try {
+		Student.Save_Pre_Admission(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.post('/Save_Review/', function (req, res, next) {
+	try {
+		Student.Save_Review(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
 
 router.get("/Search_Receipt/", function (req, res, next) {
 	try {
@@ -2368,7 +2103,7 @@ router.get("/Get_FollowUp_History/:Student_Id_?", async (req, res, next) => {
 });
 router.get("/Delete_Receipt/:Fees_Receipt_Id?/:Application_details_Id?", function (req, res, next) {
 	try {
-		Student.Delete_Receipt(req.params.Fees_Receipt_Id,req.params.Application_details_Id, function (err, rows) {
+		Student.Delete_Receipt(req.params.Fees_Receipt_Id, req.params.Application_details_Id, function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -2408,7 +2143,7 @@ router.get("/Search_Student_Agent/", function (req, res, next) {
 
 router.get("/Get_Student/:Student_Id_?/:To_User_?", function (req, res, next) {
 	try {
-		Student.Get_Student(req.params.Student_Id_,req.params.To_User_, function (err, rows) {
+		Student.Get_Student(req.params.Student_Id_, req.params.To_User_, function (err, rows) {
 			if (err) {
 				//;
 				res.json(err);
@@ -2483,37 +2218,37 @@ router.get("/Get_Student_Agent/:Student_Id_?", function (req, res, next) {
 	}
 });
 router.get("/Get_Student_Freelancer", function (req, res, next) {
-    try {
-        const studentId = req.query.Student_Id_;
-        Student.Get_Student_Freelancer(studentId, function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-        // Handle the error
-    } finally {
-        // Any cleanup code if necessary
-    }
+	try {
+		const studentId = req.query.Student_Id_;
+		Student.Get_Student_Freelancer(studentId, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+		// Handle the error
+	} finally {
+		// Any cleanup code if necessary
+	}
 });
 router.get("/Get_Student_Edit_check/:Student_Id_", function (req, res, next) {
 	console.log('req.params.Student_Id_;: ', req.params.Student_Id_);
-    try {
-        const studentId = req.params.Student_Id_;
+	try {
+		const studentId = req.params.Student_Id_;
 
-        Student.Get_Student_Edit_check(studentId, function (err, rows) {
-            if (err) {
-                res.status(500).json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-        console.error("Error in Get_Student_Edit_check route:", e);
-        res.status(500).json({ error: "Internal server error" });
-    }
+		Student.Get_Student_Edit_check(studentId, function (err, rows) {
+			if (err) {
+				res.status(500).json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+		console.error("Error in Get_Student_Edit_check route:", e);
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
 
 
@@ -2897,9 +2632,9 @@ router.get(
 				req.params.Fromdate_,
 				req.params.Todate_,
 				req.params.Search_By_,
-		
+
 				req.params.SearchbyName_,
-			
+
 				req.params.By_User_,
 				req.params.Is_Date_Check_,
 				req.params.Branch_,
@@ -2947,7 +2682,7 @@ router.get(
 				req.params.Is_Date_Check_,
 				req.params.Branch_,
 				req.params.Fees_Receipt_Status_
-				
+
 			);
 
 			res.json(result);
@@ -2973,7 +2708,7 @@ router.get(
 				req.params.Pointer_Stop_,
 				req.params.Page_Length_,
 				req.params.Assign_User_
-				
+
 			);
 
 			res.json(result);
@@ -2999,7 +2734,7 @@ router.get(
 				req.params.Pointer_Start_,
 				req.params.Pointer_Stop_,
 				req.params.Page_Length_
-				
+
 			);
 
 			res.json(result);
@@ -3316,7 +3051,7 @@ router.post("/Fees_Receipt_Mail/", async function (req, res, next) {
 	}
 });
 router.get(
-	"/Student_Registration_Summary/:Fromdate_?/:Todate_?/:Branch_?/:Is_Date_Check_?/:Login_User_Id_?",
+	"/Student_Registration_Summary/:Fromdate_?/:Todate_?/:Branch_?/:Is_Date_Check_?/:Login_User_Id_?/:User_Id_Temp_",
 	async function (req, res, next) {
 		var result = "";
 		try {
@@ -3325,7 +3060,8 @@ router.get(
 				req.params.Todate_,
 				req.params.Branch_,
 				req.params.Is_Date_Check_,
-				req.params.Login_User_Id_
+				req.params.Login_User_Id_,
+				req.params.User_Id_Temp_
 			);
 
 			res.json(result);
@@ -3390,32 +3126,32 @@ router.get(
 // );
 
 router.get(
-    "/Search_Registration_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Registration_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.View_Branch_
-            );
+	"/Search_Registration_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Registration_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.View_Branch_
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 
@@ -3560,19 +3296,16 @@ router.post("/Send_Welcome_Mail/", async function (req, res, next) {
 });
 
 router.get(
-	"/Pending_FollowUp/:Department_?/:Branch_?/:By_User_?/:user_category_?/:Login_User_Id_?/:Day_Type_value_?/:look_In_Date_Value_?/:FromDate_?/:ToDate_?",
+	"/Pending_FollowUp/:Department_?/:Branch_?/:By_User_?/:Login_User_Id_?/:SearchbyName_?",
 	async function (req, res, next) {
-		console.log('	req.params.user_category_,: ', 	req.params.user_category_);
 		var result = "";
 		try {
 			result = await Student.Pending_FollowUp(
 				req.params.Department_,
 				req.params.Branch_,
 				req.params.By_User_,
-				req.params.user_category_,
-				
-				req.params.Login_User_Id_,req.params.Day_Type_value_,
-				req.params.look_In_Date_Value_,req.params.FromDate_,req.params.ToDate_
+				req.params.Login_User_Id_,
+				req.params.SearchbyName_
 			);
 			res.json(result);
 		} catch (e) {
@@ -3582,11 +3315,10 @@ router.get(
 );
 
 
-
 router.get(
 	"/Pending_FollowUp_Task/:Department_?/:Branch_?/:By_User_?/:user_category_?/:Login_User_Id_?/:Day_Type_value_?/:look_In_Date_Value_?/:FromDate_?/:ToDate_?",
 	async function (req, res, next) {
-		console.log('	req.params.user_category_,: ', 	req.params.user_category_);
+		console.log('	req.params.user_category_,: ', req.params.user_category_);
 		var result = "";
 		try {
 			result = await Student.Pending_FollowUp_Task(
@@ -3594,9 +3326,9 @@ router.get(
 				req.params.Branch_,
 				req.params.By_User_,
 				req.params.user_category_,
-				
-				req.params.Login_User_Id_,req.params.Day_Type_value_,
-				req.params.look_In_Date_Value_,req.params.FromDate_,req.params.ToDate_
+
+				req.params.Login_User_Id_, req.params.Day_Type_value_,
+				req.params.look_In_Date_Value_, req.params.FromDate_, req.params.ToDate_
 			);
 			res.json(result);
 		} catch (e) {
@@ -3662,80 +3394,80 @@ router.get(
 );
 
 router.get(
-    "/FollowUp_Summary/:By_User_?/:Login_User_Id_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.FollowUp_Summary(
-                req.params.By_User_,
-                req.params.Login_User_Id_
-            );
+	"/FollowUp_Summary/:By_User_?/:Login_User_Id_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.FollowUp_Summary(
+				req.params.By_User_,
+				req.params.Login_User_Id_
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/FollowUp_Summary/:By_User_?/:Department_?/:UserType_Value_?/:Login_User_Id_?/:Day_Type_value_?/:look_In_Date_Value_?/:FromDate_?/:ToDate_?",
-    async function (req, res, next) {
-        var result = "";
+	"/FollowUp_Summary/:By_User_?/:Department_?/:UserType_Value_?/:Login_User_Id_?/:Day_Type_value_?/:look_In_Date_Value_?/:FromDate_?/:ToDate_?",
+	async function (req, res, next) {
+		var result = "";
 		console.log('req.params.Department_: ', req.params.UserType_Value_);
-        try {
-            result = await Student.FollowUp_Summary(
-                req.params.By_User_,
+		try {
+			result = await Student.FollowUp_Summary(
+				req.params.By_User_,
 				req.params.Department_,
 				req.params.UserType_Value_,
-                req.params.Login_User_Id_,  
-				req.params.Day_Type_value_,  
-				req.params.look_In_Date_Value_,req.params.FromDate_,req.params.ToDate_
-            );
+				req.params.Login_User_Id_,
+				req.params.Day_Type_value_,
+				req.params.look_In_Date_Value_, req.params.FromDate_, req.params.ToDate_
+			);
 
-            res.json(result);
-        } catch (e) {
+			res.json(result);
+		} catch (e) {
 			console.log('e: ', e);
-        } finally {
-        }
-    }
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/Lead_Summary/:Department_Status_Id_?/:By_User_?/:Login_User_Id_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Lead_Summary(
+	"/Lead_Summary/:Department_Status_Id_?/:By_User_?/:Login_User_Id_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Lead_Summary(
 				req.params.Department_Status_Id_,
-                req.params.By_User_,
-                req.params.Login_User_Id_
-            );
+				req.params.By_User_,
+				req.params.Login_User_Id_
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 
 
 
 router.get(
-    "/Agent_Search_data/:By_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Agent_Search_data(
+	"/Agent_Search_data/:By_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Agent_Search_data(
 				req.params.By_User_
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 router.get(
 	"/Class_Summary/:By_User_?/:Login_User_Id_?/:Branch_Id_?/:Department_Id_?",
@@ -3830,12 +3562,12 @@ router.get(
 // router.get("/Get_Dashboard_Agent_Count/:Agent_Id_?", async function (req, res, next) {
 // 	var result = "";
 // 	try {
-		
+
 // 		result = await Student.Get_Dashboard_Agent_Count(req.params.Agent_Id_);
 
 // 		res.json(result);
 // 	} catch (e) {
-		
+
 // 	} finally {
 // 	}
 // });
@@ -3957,49 +3689,49 @@ router.get("/Get_freelancer_Account_Info/:Agent_Id_?", function (req, res, next)
 	} finally {
 	}
 });
-router.get("/Get_Dashboard_Count/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?/:User_Id_?", 
-async function (req, res, next) {
-    try {
-        const result = await Student.Get_Dashboard_Count(
-            req.params.By_User_,
-            req.params.FromDate_,
-            req.params.ToDate_,
-            req.params.Date_Value_,
-            req.params.User_Id_   // <--- Added
-        );
-        res.json(result);
-    } catch (e) {}
-});
+router.get("/Get_Dashboard_Count/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?/:User_Id_?",
+	async function (req, res, next) {
+		try {
+			const result = await Student.Get_Dashboard_Count(
+				req.params.By_User_,
+				req.params.FromDate_,
+				req.params.ToDate_,
+				req.params.Date_Value_,
+				req.params.User_Id_   // <--- Added
+			);
+			res.json(result);
+		} catch (e) { }
+	});
 
 // router.get("/Get_Dashboard_Count/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?", async function (req, res, next) {
 // 	var result = "";
 // 	try {
-		
+
 // 		result = await Student.Get_Dashboard_Count(req.params.By_User_,req.params.FromDate_,req.params.ToDate_,req.params.Date_Value_);
 
 // 		res.json(result);
 // 	} catch (e) {
-		
+
 // 	} finally {
 // 	}
 // });
 router.get("/Get_Dashboard_Count_Agent/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?", async function (req, res, next) {
 	var result = "";
 	try {
-		
-		result = await Student.Get_Dashboard_Count_Agent(req.params.By_User_,req.params.FromDate_,req.params.ToDate_,req.params.Date_Value_);
+
+		result = await Student.Get_Dashboard_Count_Agent(req.params.By_User_, req.params.FromDate_, req.params.ToDate_, req.params.Date_Value_);
 
 		res.json(result);
 	} catch (e) {
-		
+
 	} finally {
 	}
 });
 router.get("/Get_Dashboard_Count_Freelancer/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?", async function (req, res, next) {
 	var result = "";
 	try {
-		
-		result = await Student.Get_Dashboard_Count_Freelancer(req.params.By_User_,req.params.FromDate_,req.params.ToDate_,req.params.Date_Value_);
+
+		result = await Student.Get_Dashboard_Count_Freelancer(req.params.By_User_, req.params.FromDate_, req.params.ToDate_, req.params.Date_Value_);
 
 		res.json(result);
 	} catch (e) {
@@ -4011,8 +3743,8 @@ router.get("/Get_Dashboard_Count_Freelancer/:By_User_?/:FromDate_?/:ToDate_?/:Da
 router.get("/Get_Dashboard_Count_Freelancer_Manager/:By_User_?/:FromDate_?/:ToDate_?/:Date_Value_?", async function (req, res, next) {
 	var result = "";
 	try {
-		
-		result = await Student.Get_Dashboard_Count_Freelancer_Manager(req.params.By_User_,req.params.FromDate_,req.params.ToDate_,req.params.Date_Value_);
+
+		result = await Student.Get_Dashboard_Count_Freelancer_Manager(req.params.By_User_, req.params.FromDate_, req.params.ToDate_, req.params.Date_Value_);
 
 		res.json(result);
 	} catch (e) {
@@ -4023,12 +3755,12 @@ router.get("/Get_Dashboard_Count_Freelancer_Manager/:By_User_?/:FromDate_?/:ToDa
 router.get("/Get_Application_Dashboard_Count/:By_User_?", async function (req, res, next) {
 	var result = "";
 	try {
-		
+
 		result = await Student.Get_Application_Dashboard_Count(req.params.By_User_);
 
 		res.json(result);
 	} catch (e) {
-		
+
 	} finally {
 	}
 });
@@ -4087,7 +3819,7 @@ router.get(
 	}
 );
 router.get(
-	"/Search_Enquiry_Source_Summary_Track/:Fromdate_?/:Todate_?/:By_User_?/:Is_Date_Check_?/:Branch_",
+	"/Search_Enquiry_Source_Summary_Track/:Fromdate_?/:Todate_?/:By_User_?/:Is_Date_Check_?/:Branch_?/:User_Id_Temp_",
 	async function (req, res, next) {
 		var result = "";
 		try {
@@ -4096,16 +3828,37 @@ router.get(
 				req.params.Todate_,
 				req.params.By_User_,
 				req.params.Is_Date_Check_,
-				req.params.Branch_
+				req.params.Branch_,
+				req.params.User_Id_Temp_
 			);
 
 			res.json(result);
 		} catch (e) {
-			
-		} finally {	
+
+		} finally {
 		}
 	}
 );
+// router.get(
+// 	"/Search_Enquiry_Source_Summary_Track/:Fromdate_?/:Todate_?/:By_User_?/:Is_Date_Check_?/:Branch_",
+// 	async function (req, res, next) {
+// 		var result = "";
+// 		try {
+// 			result = await Student.Search_Enquiry_Source_Summary_Track(
+// 				req.params.Fromdate_,
+// 				req.params.Todate_,
+// 				req.params.By_User_,
+// 				req.params.Is_Date_Check_,
+// 				req.params.Branch_
+// 			);
+
+// 			res.json(result);
+// 		} catch (e) {
+
+// 		} finally {	
+// 		}
+// 	}
+// );
 router.get(
 	"/Search_Enrollment_Agent_Summary_Track/:Fromdate_?/:Todate_?/:By_User_?/:Is_Date_Check_?/:Branch_",
 	async function (req, res, next) {
@@ -4121,8 +3874,8 @@ router.get(
 
 			res.json(result);
 		} catch (e) {
-			
-		} finally {	
+
+		} finally {
 		}
 	}
 );
@@ -4143,8 +3896,8 @@ router.get(
 
 			res.json(result);
 		} catch (e) {
-			
-		} finally {	
+
+		} finally {
 		}
 	}
 );
@@ -4165,8 +3918,8 @@ router.get(
 
 			res.json(result);
 		} catch (e) {
-			
-		} finally {	
+
+		} finally {
 		}
 	}
 );
@@ -4238,7 +3991,7 @@ router.post("/Save_Data_Migration/", function (req, res) {
 
 router.get("/Search_Users_Import/", function (req, res, next) {
 	try {
-		Student.Search_Users_Import( function (err, rows) {
+		Student.Search_Users_Import(function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -4295,7 +4048,7 @@ router.get("/Delete_Student_Report/", function (req, res, next) {
 });
 router.get("/Delete_Student/:Student_Id_?/:Login_User_?", function (req, res, next) {
 	try {
-		Student.Delete_Student(req.params.Student_Id_,req.params.Login_User_, function (err, rows) {
+		Student.Delete_Student(req.params.Student_Id_, req.params.Login_User_, function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -4307,40 +4060,40 @@ router.get("/Delete_Student/:Student_Id_?/:Login_User_?", function (req, res, ne
 	}
 });
 router.get("/Delete_Student_freelancer", function (req, res, next) {
-    try {
+	try {
 		console.log('req.query.Student_Id_: ', req.query.Student_Id_);
-        const studentId = req.query.Student_Id_;
-	
-        Student.Delete_Student_freelancer(studentId, function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-        // Handle the error appropriately
-        res.status(500).json({ error: 'An unexpected error occurred.' });
-    } finally {
-        // Any cleanup code if necessary
-    }
+		const studentId = req.query.Student_Id_;
+
+		Student.Delete_Student_freelancer(studentId, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+		// Handle the error appropriately
+		res.status(500).json({ error: 'An unexpected error occurred.' });
+	} finally {
+		// Any cleanup code if necessary
+	}
 });
 
 
 
-	router.get("/Delete_Student_freelancer_data/:Student_Id_?", function (req, res, next) {
-		try {
-			Student.Delete_Student_freelancer_data(req.params.Student_Id_, function (err, rows) {
-				if (err) {
-					res.json(err);
-				} else {
-					res.json(rows);
-				}
-			});
-		} catch (e) {
-		} finally {
-		}
-	});
+router.get("/Delete_Student_freelancer_data/:Student_Id_?", function (req, res, next) {
+	try {
+		Student.Delete_Student_freelancer_data(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
+});
 
 router.get(
 	"/Send_Receipt_Sms_Email/:Mobile_?/:Email_?/:Student_Name?/:Amount_ ?/:Date_ ?/:Total_Amount_ ?",
@@ -4366,7 +4119,7 @@ router.get(
 // router.get("/Transfer_Cofirmation/:Student_Id_?/:Transfer_Source_?/:Login_User_Id_?/:Department_Id_?/:Remark_?/:Transfer_Status_Id_?/:Transfer_Status_Name_?/:Sub_Status_Id_?/:Sub_Status_Name_?/:Application_Id_Ref_?/:Followup_Branch_Id_?/:Followup_Branch_Name_?/:Followup_Department_Id_?/:Followup_Department_Name_?/:Followup_Status_Id_?/:Followup_Status_Name_?/:Followup_To_User_Id_?/:Followup_To_User_Name_?", function (req, res, next) {
 // 	try {
 // 		Student.Transfer_Cofirmation(req.params.Student_Id_,req.params.Transfer_Source_,req.params.Login_User_Id_,req.params.Department_Id_,req.params.Remark_,req.params.Transfer_Status_Id_,req.params.Transfer_Status_Name_,req.params.Sub_Status_Id_,req.params.Sub_Status_Name_,req.params.Application_Id_Ref_,req.params.Followup_Branch_Id_,req.params.Followup_Branch_Name_,req.params.Followup_Department_Id_,req.params.Followup_Department_Name_,req.params.Followup_Status_Id_,req.params.Followup_Status_Name_,req.params.Followup_To_User_Id_,req.params.Followup_To_User_Name_, function (err, rows) {
-			
+
 // 			if (err) {
 // 				res.json(err);
 // 			} else {
@@ -4381,19 +4134,19 @@ router.get(
 // });
 
 router.get("/Transfer_Cofirmation", function (req, res, next) {
-    try {
-        Student.Transfer_Cofirmation(req.query.Student_Id_,req.query.Transfer_Source_,req.query.Login_User_Id_,req.query.Department_Id_,req.query.Remark_,req.query.Transfer_Status_Id_,req.query.Transfer_Status_Name_,req.query.Next_FollowUp_Date_,req.query.Sub_Status_Id_,req.query.Sub_Status_Name_,req.query.Application_Id_Ref_,req.query.hoursToAdd_, function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                console.log(err)
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-        console.log(e)
-    } finally {
-    }
+	try {
+		Student.Transfer_Cofirmation(req.query.Student_Id_, req.query.Transfer_Source_, req.query.Login_User_Id_, req.query.Department_Id_, req.query.Remark_, req.query.Transfer_Status_Id_, req.query.Transfer_Status_Name_, req.query.Next_FollowUp_Date_, req.query.Sub_Status_Id_, req.query.Sub_Status_Name_, req.query.Application_Id_Ref_, req.query.hoursToAdd_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				console.log(err)
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+		console.log(e)
+	} finally {
+	}
 });
 
 
@@ -4412,18 +4165,16 @@ router.post("/Save_FollowUp/", function (req, res) {
 	}
 });
 
-router.post('/Transfer_With_Application/',async function(req,res,next)
- { 
- try 
- {
- const resp=await Student.Transfer_With_Application(req.body);
- return res.send(resp);
- }
- catch(e){
-	
-   return res.send(e);
- }
-  });
+router.post('/Transfer_With_Application/', async function (req, res, next) {
+	try {
+		const resp = await Student.Transfer_With_Application(req.body);
+		return res.send(resp);
+	}
+	catch (e) {
+
+		return res.send(e);
+	}
+});
 
 router.get(
 	"/Search_Student_Import/:From_Date_?/:To_Date_?/:Is_Date_Check_?/",
@@ -4614,34 +4365,27 @@ router.get("/Resume_Mode_Dropdown/", function (req, res, next) {
 	}
 });
 
-router.get('/Check_Agent_document_Details/:Student_Id_?/:University_Id_?',function(req,res,next)
-{ 
-try 
-{console.log('req.params.University_Id_: ', req.params.University_Id_);
-	
-    Student.Check_Agent_document_Details(req.params.Student_Id_,req.params.University_Id_, function (err, rows) 
-	
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-	console.log(e);
-	
-}
-finally 
-{
-}
- });
+router.get('/Check_Agent_document_Details/:Student_Id_?/:University_Id_?', function (req, res, next) {
+	try {
+		console.log('req.params.University_Id_: ', req.params.University_Id_);
+
+		Student.Check_Agent_document_Details(req.params.Student_Id_, req.params.University_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+		console.log(e);
+
+	}
+	finally {
+	}
+});
 
 router.get("/Document_Type_Dropdown/", function (req, res, next) {
 	try {
@@ -4717,7 +4461,7 @@ router.get("/Task_Status_Dropdown/", function (req, res, next) {
 
 router.get("/Task_Item_Dropdown/:Task_Group_Id_?", function (req, res, next) {
 	try {
-		Student.Task_Item_Dropdown(req.params.Task_Group_Id_,function (err, rows) {
+		Student.Task_Item_Dropdown(req.params.Task_Group_Id_, function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -4844,7 +4588,7 @@ router.get("/Load_Visa_Type/", function (req, res, next) {
 });
 
 router.post("/Save_ApplicationDetails/", function (req, res, next) {
-	   ;
+	;
 	try {
 		Student.Save_ApplicationDetails(req.body, function (err, rows) {
 			if (err) {
@@ -4973,7 +4717,7 @@ router.get(
 	function (req, res, next) {
 		try {
 			Student.Get_ApplicationDetailswise_History(
-				req.params.Application_details_Id_,req.params.Feesdetails_Id_,
+				req.params.Application_details_Id_, req.params.Feesdetails_Id_,
 				function (err, rows) {
 					if (err) {
 						res.json(err);
@@ -5126,30 +4870,23 @@ router.get("/Get_Student_Edit/:Student_Id_?", function (req, res, next) {
 
 
 
-router.post('/Activate_Application/',function(req,res,next)
-{ 
-try 
-{
-    Student.Activate_Application(req.body, function (err, rows) 
-{
-if (err) 
-{
-//
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
+router.post('/Activate_Application/', function (req, res, next) {
+	try {
+		Student.Activate_Application(req.body, function (err, rows) {
+			if (err) {
+				//
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
 
-}
-finally 
-{
-}
+	}
+	finally {
+	}
 });
 router.get("/Student_Approve/", function (req, res, next) {
 	try {
@@ -5472,61 +5209,61 @@ router.get("/Get_Visa_Details/:Student_Id_?", function (req, res, next) {
 });
 
 router.get("/Reset_Notification_Count/:User_Id_?", function (req, res, next) {
-    try {
-        Student.Reset_Notification_Count(req.params.User_Id_, function (err, rows) {
-            if (err) {
-                ;
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-    } finally {
-    }
+	try {
+		Student.Reset_Notification_Count(req.params.User_Id_, function (err, rows) {
+			if (err) {
+				;
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
 });
 
 router.get("/Refund_Approve/", function (req, res, next) {
-    try {
-        Student.Refund_Approve(
-            req.query.Fees_Receipt_Id_,
-            req.query.Student_Id_temp_,
-            req.query.Login_User_,
-            function (err, rows) {
-                if (err) {
-                    ;
+	try {
+		Student.Refund_Approve(
+			req.query.Fees_Receipt_Id_,
+			req.query.Student_Id_temp_,
+			req.query.Login_User_,
+			function (err, rows) {
+				if (err) {
+					;
 
-                    res.json(err);
-                } else {
-                    console.log(rows);
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
-        ;
-    } finally {
-    }
+					res.json(err);
+				} else {
+					console.log(rows);
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
+		;
+	} finally {
+	}
 });
 
 router.get("/Get_All_Notification/", function (req, res, next) {
-    try {
-        Student.Get_All_Notification(
-            req.query.Date_,
-            req.query.User_Id_,
-            req.query.login_Id_,
-            function (err, rows) {
-                if (err) {
-                    ;
-                    res.json(err);
-                } else {
-                    res.json(rows);
-                }
-            }
-        );
-    } catch (e) {
-    } finally {
-    }
+	try {
+		Student.Get_All_Notification(
+			req.query.Date_,
+			req.query.User_Id_,
+			req.query.login_Id_,
+			function (err, rows) {
+				if (err) {
+					;
+					res.json(err);
+				} else {
+					res.json(rows);
+				}
+			}
+		);
+	} catch (e) {
+	} finally {
+	}
 });
 
 router.get("/Get_Visa_Documents/:Visa_Id_ ?", function (req, res, next) {
@@ -5727,156 +5464,156 @@ router.get(
 
 router.post("/Save_Front_Student/", async function (req, res, next) {
 	try {
-	  const resp = await Student.Save_Front_Student(req.body);
-	  return res.send(resp);
+		const resp = await Student.Save_Front_Student(req.body);
+		return res.send(resp);
 	} catch (e) {
-	  return res.send(e);
+		return res.send(e);
 	}
-  });
+});
 
-  router.get("/Search_Application_Report", async function (req, res, next) {
-    var result = "";
-    try {
-        result = await Student.Search_Application_Report(
-            req.query.Fromdate_,
-            req.query.Todate_,
-            req.query.Branch_,
-            req.query.By_User_,
-            req.query.Is_Date_Check_,
-            req.query.Login_User_Id_,
-            req.query.Status_Value_,
-            req.query.Agent_Id_,
-            req.query.Application_status_Id_,
-            req.query.Intake_Id_,
-            req.query.Intake_Year_Id_,
-            req.query.Country_Id_,
-            req.query.University_Id_,
-            req.query.Is_Active_Check_,
-			req.query.To_User_Id_,req.query.Course_Id_,
+router.get("/Search_Application_Report", async function (req, res, next) {
+	var result = "";
+	try {
+		result = await Student.Search_Application_Report(
+			req.query.Fromdate_,
+			req.query.Todate_,
+			req.query.Branch_,
+			req.query.By_User_,
+			req.query.Is_Date_Check_,
+			req.query.Login_User_Id_,
+			req.query.Status_Value_,
+			req.query.Agent_Id_,
+			req.query.Application_status_Id_,
+			req.query.Intake_Id_,
+			req.query.Intake_Year_Id_,
+			req.query.Country_Id_,
+			req.query.University_Id_,
+			req.query.Is_Active_Check_,
+			req.query.To_User_Id_, req.query.Course_Id_,
 			req.query.Subordinators_id_,
-        );
+		);
 
-        res.json(result);
-        console.log(result);
-    } catch (e) {
-        ;
-    } finally {
-    }
+		res.json(result);
+		console.log(result);
+	} catch (e) {
+		;
+	} finally {
+	}
 });
 
 
 
 router.get("/Search__direct_Application_Report", async function (req, res, next) {
-    var result = "";
-    try {
-        result = await Student.Search__direct_Application_Report(
-            req.query.Fromdate_,
-            req.query.Todate_,
-            req.query.Branch_,
-            req.query.By_User_,
-            req.query.Is_Date_Check_,
-            req.query.Login_User_Id_,
-            req.query.Status_Value_,
-            req.query.Agent_Id_,
-            req.query.Application_status_Id_,
-            req.query.Intake_Id_,
-            req.query.Intake_Year_Id_,
-            req.query.Country_Id_,
-            req.query.University_Id_,
-            req.query.Is_Active_Check_,
-			req.query.To_User_Id_,req.query.Course_Id_,
-        );
+	var result = "";
+	try {
+		result = await Student.Search__direct_Application_Report(
+			req.query.Fromdate_,
+			req.query.Todate_,
+			req.query.Branch_,
+			req.query.By_User_,
+			req.query.Is_Date_Check_,
+			req.query.Login_User_Id_,
+			req.query.Status_Value_,
+			req.query.Agent_Id_,
+			req.query.Application_status_Id_,
+			req.query.Intake_Id_,
+			req.query.Intake_Year_Id_,
+			req.query.Country_Id_,
+			req.query.University_Id_,
+			req.query.Is_Active_Check_,
+			req.query.To_User_Id_, req.query.Course_Id_,
+		);
 
-        res.json(result);
-        console.log(result);
-    } catch (e) {
-        ;
-    } finally {
-    }
+		res.json(result);
+		console.log(result);
+	} catch (e) {
+		;
+	} finally {
+	}
 });
 router.get("/Search_Agent_Application_Report", async function (req, res, next) {
-    var result = "";
-    try {
-        result = await Student.Search_Agent_Application_Report(
-            req.query.Fromdate_,
-            req.query.Todate_,
-            req.query.Branch_,
-            req.query.By_User_,
-            req.query.Is_Date_Check_,
-            req.query.Login_User_Id_,
-            req.query.Status_Value_,
-            req.query.Agent_Id_,
-            req.query.Application_status_Id_,
-            req.query.Intake_Id_,
-            req.query.Intake_Year_Id_,
-            req.query.Country_Id_,
-            req.query.University_Id_,
-            req.query.Is_Active_Check_,
-			req.query.To_User_Id_,req.query.Course_Id_,
-        );
+	var result = "";
+	try {
+		result = await Student.Search_Agent_Application_Report(
+			req.query.Fromdate_,
+			req.query.Todate_,
+			req.query.Branch_,
+			req.query.By_User_,
+			req.query.Is_Date_Check_,
+			req.query.Login_User_Id_,
+			req.query.Status_Value_,
+			req.query.Agent_Id_,
+			req.query.Application_status_Id_,
+			req.query.Intake_Id_,
+			req.query.Intake_Year_Id_,
+			req.query.Country_Id_,
+			req.query.University_Id_,
+			req.query.Is_Active_Check_,
+			req.query.To_User_Id_, req.query.Course_Id_,
+		);
 
-        res.json(result);
-        console.log(result);
-    } catch (e) {
-        ;
-    } finally {
-    }
+		res.json(result);
+		console.log(result);
+	} catch (e) {
+		;
+	} finally {
+	}
 });
 
 
 router.get(
-    "/Search_Passport_Expiry_Report/:Fromdate_?/:Todate_?/:By_User_?/:Login_User_Id_?/:look_In_Date_Value?/:Branch_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Passport_Expiry_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.By_User_,
-                req.params.Login_User_Id_,
-                req.params.look_In_Date_Value
-            );
+	"/Search_Passport_Expiry_Report/:Fromdate_?/:Todate_?/:By_User_?/:Login_User_Id_?/:look_In_Date_Value?/:Branch_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Passport_Expiry_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.By_User_,
+				req.params.Login_User_Id_,
+				req.params.look_In_Date_Value
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/Freelancer_Transferred_lead_Data/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Transferred_lead_Data(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_
-            );
+	"/Freelancer_Transferred_lead_Data/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Transferred_lead_Data(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_
+			);
 
-            res.json(result);
-        } catch (e) {
-            ;
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+			;
+		} finally {
+		}
+	}
 );
 
 
@@ -5884,85 +5621,83 @@ router.get(
 
 
 router.get(
-    "/My_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.My_Student_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_
-            );
+	"/My_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.My_Student_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_
+			);
 
-            res.json(result);
-        } catch (e) {
-            ;
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+			;
+		} finally {
+		}
+	}
 );
-router.post('/Save_Agent_Student/',async function(req,res,next)
-{ 
-try 
-{
-const resp=await Student.Save_Agent_Student(req.body);
-console.log(resp)
-return res.send(resp);
-}
-catch(e){
- console.log(e) 
-return res.send(e);
+router.post('/Save_Agent_Student/', async function (req, res, next) {
+	try {
+		const resp = await Student.Save_Agent_Student(req.body);
+		console.log(resp)
+		return res.send(resp);
+	}
+	catch (e) {
+		console.log(e)
+		return res.send(e);
 
-}
+	}
 });
 
 router.get("/Search_Agent_Student/", function (req, res, next) {
-	
+
 	try {
 		Student.Search_Agent_Student(
 			req.query.From_Date_,
-            req.query.To_Date_,
-            req.query.SearchbyName_,
-            req.query.Department_,
-            req.query.Branch_,
-            req.query.Enquiry_For_,
-            req.query.Class_,
-            req.query.Sort_By_,
-            req.query.Intake_,
-            req.query.Intake_Year_,
-            req.query.Agent_,
-            req.query.By_User_,
-            req.query.By_User_Id_,
-            req.query.Status_,
-            req.query.Is_Date_Check_,
-            req.query.Page_Index1_,
-            req.query.Page_Index2_,
-            req.query.Login_Agent_,
-            req.query.RowCount,
-            req.query.RowCount2,
+			req.query.To_Date_,
+			req.query.SearchbyName_,
+			req.query.Department_,
+			req.query.Branch_,
+			req.query.Enquiry_For_,
+			req.query.Class_,
+			req.query.Sort_By_,
+			req.query.Intake_,
+			req.query.Intake_Year_,
+			req.query.Agent_,
+			req.query.By_User_,
+			req.query.By_User_Id_,
+			req.query.Status_,
+			req.query.Is_Date_Check_,
+			req.query.Page_Index1_,
+			req.query.Page_Index2_,
+			req.query.Login_Agent_,
+			req.query.RowCount,
+			req.query.RowCount2,
 			req.query.File_Status_Value_,
 			function (err, rows) {
 				if (err) {
 					console.log(err);
 					res.json(err);
 				} else {
-					
+
 					res.json(rows);
 				}
 			}
@@ -5976,7 +5711,7 @@ router.get("/Search_Agent_Student/", function (req, res, next) {
 router.get("/Search_Faculty_Typeahead/", function (req, res, next) {
 	try {
 		Student.Search_Faculty_Typeahead(
-			req.query.Users_Name,req.query.Role_Type,
+			req.query.Users_Name, req.query.Role_Type,
 			function (err, rows) {
 				if (err) {
 					res.json(err);
@@ -5990,364 +5725,322 @@ router.get("/Search_Faculty_Typeahead/", function (req, res, next) {
 	}
 });
 router.get(
-    "/Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
+	"/Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
 			console.log('req.params.UserType_Value: ', req.params.UserType_Value_);
-            result = await Student.Search_Student_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_,req.params.UserType_Value_,
-	
-            );
+			result = await Student.Search_Student_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_, req.params.UserType_Value_,
 
-            res.json(result);
+			);
+
+			res.json(result);
 			console.log('result: ', result);
-        } catch (e) {
+		} catch (e) {
 			console.log('e: ', e);
-            ;
-        } finally {
-        }
-    }
+			;
+		} finally {
+		}
+	}
 );
 
 
 
 router.get(
-    "/Search_Freelancer_Commission_Management/:Fromdate_?/:Todate_?/:Look_In_Date_?/:freelancer_?/:commission_type_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Freelancer_Commission_Management(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Look_In_Date_,
-                req.params.freelancer_,
-                req.params.commission_type_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-            );
+	"/Search_Freelancer_Commission_Management/:Fromdate_?/:Todate_?/:Look_In_Date_?/:freelancer_?/:commission_type_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Freelancer_Commission_Management(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Look_In_Date_,
+				req.params.freelancer_,
+				req.params.commission_type_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+			);
 
-            res.json(result);
+			res.json(result);
 			console.log('result: ', result);
-        } catch (e) {
+		} catch (e) {
 			console.log('e: ', e);
-            ;
-        } finally {
-        }
-    }
+			;
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/Lead_Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Date_Type_Value_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
+	"/Lead_Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Date_Type_Value_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
 			console.log('req.params.UserType_Value: ', req.params.UserType_Value_);
-            result = await Student.Lead_Search_Student_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_,req.params.UserType_Value_,req.params.Date_Type_Value_
-				
-            );
-console.log('req.params.Date_Type_Value_: ', req.params.Date_Type_Value_);
-	
-            res.json(result);
+			result = await Student.Lead_Search_Student_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_, req.params.UserType_Value_, req.params.Date_Type_Value_
+
+			);
+			console.log('req.params.Date_Type_Value_: ', req.params.Date_Type_Value_);
+
+			res.json(result);
 			console.log('result: ', result);
-        } catch (e) {
+		} catch (e) {
 			console.log('e: ', e);
-            ;
-        } finally {
-        }
-    }
+			;
+		} finally {
+		}
+	}
 );
 
 
 
 router.get(
-    "/Agent_Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Application_Status_Search?",
-    async function (req, res, next) {
-        var result = "";
-        try {
+	"/Agent_Search_Student_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Application_Status_Search?",
+	async function (req, res, next) {
+		var result = "";
+		try {
 			console.log('req.params.UserType_Value: ', req.params.UserType_Value_);
-            result = await Student.Agent_Search_Student_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_,req.params.UserType_Value_,
+			result = await Student.Agent_Search_Student_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_, req.params.UserType_Value_,
 				req.params.Application_Status_Search
-            );
+			);
 
-            res.json(result);
+			res.json(result);
 			console.log('result: ', result);
-        } catch (e) {
+		} catch (e) {
 			console.log('e: ', e);
-            ;
-        } finally {
-        }
-    }
+			;
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/Student_data_Search_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Date_Type_Value_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
+	"/Student_data_Search_Report/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:UserType_Value_?/:Date_Type_Value_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
 			console.log('req.params.UserType_Value: ', req.params.UserType_Value_);
-            result = await Student.Student_data_Search_Report(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_,req.params.UserType_Value_,req.params.Date_Type_Value_
-	
-            );
+			result = await Student.Student_data_Search_Report(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_, req.params.UserType_Value_, req.params.Date_Type_Value_
 
-            res.json(result);
+			);
+
+			res.json(result);
 			console.log('result: ', result);
-        } catch (e) {
+		} catch (e) {
 			console.log('e: ', e);
-            ;
-        } finally {
-        }
-    }
+			;
+		} finally {
+		}
+	}
 );
 router.get("/Notification_Read_Status/:Notification_Count_?/:User_Id_ ?", function (req, res, next) {
-    try {
-        Student.Notification_Read_Status(req.params.Notification_Count_,req.params.User_Id_, function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-    } finally {
-    }
+	try {
+		Student.Notification_Read_Status(req.params.Notification_Count_, req.params.User_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
 });
 
 
 
-router.post('/Save_Checklist/',function(req,res,next)
-{ 
-try 
-{
-	Student.Save_Checklist(req.body, function (err, rows) 
-{
-if (err) 
-{
-  
-res.json(err);
-}
-else 
-{
-  console.log(rows)
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-  
-}
-finally 
-{
-}
+router.post('/Save_Checklist/', function (req, res, next) {
+	try {
+		Student.Save_Checklist(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				console.log(rows)
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
 });
 
 
-router.get('/Get_Checklist_Country/:Country_Id_?',function(req,res,next)
-{ 
-try 
-{
-	Student.Get_Checklist_Country(req.params.Country_Id_, function (err, rows) 
-{
-if (err) 
-{
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-}
-finally 
-{
-}
+router.get('/Get_Checklist_Country/:Country_Id_?', function (req, res, next) {
+	try {
+		Student.Get_Checklist_Country(req.params.Country_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
 });
 
-router.get('/Delete_Checklist/:Checklist_Id_?',function(req,res,next)
-{ 
-try 
-{
-	Student.Delete_Checklist(req.params.Checklist_Id_, function (err, rows) 
-{
-if (err) 
-{
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
-  //
-}
-finally 
-{
-}
+router.get('/Delete_Checklist/:Checklist_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_Checklist(req.params.Checklist_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+		//
+	}
+	finally {
+	}
 });
 
 
-router.get('/get_student_checklist/:Student_Id_?/:Checklist_Type_ ?',function(req,res,next)
-{ 
-try 
-{
-       
-    Student.get_student_checklist(req.params.Student_Id_,req.params.Checklist_Type_, function (err, rows) 
-{
- if (err) 
- {
-    
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/get_student_checklist/:Student_Id_?/:Checklist_Type_ ?', function (req, res, next) {
+	try {
+
+		Student.get_student_checklist(req.params.Student_Id_, req.params.Checklist_Type_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
- router.get('/Get_Previsa_Details_Edit/:Student_Checklist_Master_Id_?',function(req,res,next)
- { 
- try 
- {
-	Student.Get_Previsa_Details_Edit(req.params.Student_Checklist_Master_Id_, function (err, rows) 
- {
-  if (err) 
-  {
-  res.json(err);
-  }
-  else 
-  {
-	res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
+router.get('/Get_Previsa_Details_Edit/:Student_Checklist_Master_Id_?', function (req, res, next) {
+	try {
+		Student.Get_Previsa_Details_Edit(req.params.Student_Checklist_Master_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
-  router.get('/Get_Preadmission_Details_Edit/:Student_Preadmission_Checklist_Master_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-	 Student.Get_Preadmission_Details_Edit(req.params.Student_Preadmission_Checklist_Master_Id_, function (err, rows) 
-  {
-   if (err) 
-   {
-   res.json(err);
-   }
-   else 
-   {
-	 res.json(rows);
-   }
-   });
-   }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-   });
+router.get('/Get_Preadmission_Details_Edit/:Student_Preadmission_Checklist_Master_Id_?', function (req, res, next) {
+	try {
+		Student.Get_Preadmission_Details_Edit(req.params.Student_Preadmission_Checklist_Master_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
-   router.get("/update_Read_Status/", function (req, res, next) {
+router.get("/update_Read_Status/", function (req, res, next) {
 	try {
 		Student.update_Read_Status(
 			req.query.login_user_,
@@ -6366,30 +6059,23 @@ finally
 	}
 });
 
-router.post('/Save_CAS_NewTask_Followup/',function(req,res,next)
-{ 
-try 
-{
- Student.Save_CAS_NewTask_Followup(req.body, function (err, rows) 
-{
-if (err) 
-{
+router.post('/Save_CAS_NewTask_Followup/', function (req, res, next) {
+	try {
+		Student.Save_CAS_NewTask_Followup(req.body, function (err, rows) {
+			if (err) {
 
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
-});
-}
-catch (e) 
-{
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
 
-}
-finally 
-{
-}
+	}
+	finally {
+	}
 });
 
 
@@ -6399,270 +6085,235 @@ finally
 // Route to create tasks when changing status of followup (only if there any tasks under status)
 router.post("/Save_CAS_NewTask_Followup_By_Process_Id/", async function (req, res, next) {
 	try {
-	  req.body = {
-		Followup_Date: req.body.Followup_Date,
-		Student_Task_Id: req.body.Student_Task_Id,
-		Remark: req.body.Remark,
-		Task_Details: req.body.Task_Details,
-		Task_Group_Id: req.body.Task_Group_Id,
-		Student_Id: req.body.Student_Id,
-		Department_Id: req.body.Department_Id,
-		Department_Name: req.body.Department_Name,
-		To_User: req.body.To_User,
-		To_User_Name: req.body.To_User_Name,
-		Task_Status: req.body.Task_Status,
-		Status_Name: req.body.Status_Name,
-		Task_Item_Id: req.body.Task_Item_Id,
-		By_User_Id: req.body.By_User_Id,
-		By_User_Name: req.body.By_User_Name,
-		Branch_Id: req.body.Branch_Id,
-		Branch_Name: req.body.Branch_Name,
-		status: req.body.status,
-	  }
-  
-	  // Check is there any task under status
-	  // const [data] = await StatusTask.getByStatusId(req.body.status.Department_Status_Id)
-	  const [data] = await StatusTask.getByStatusId(req.body.status.Department_Status_Id)
-	  let row = [];
-  
-	  // Execute if there tasks under status
-	  if(data && data.length) {
-		// Loop through the array
-	   const array = data.map((element) => {
-		  // Create a data object with the status task and data coming through body
-		  const currentObj = {
-			...req.body,
-			Task_Details: element.description,
-			Department_Id: element.department_id,
-			Department_Name: element.Department_Name,
-			Status_Name : 'Pending',
-		  }
-  
-		  // Push all of the objects an array
-		  return currentObj;
-		})
-  
-		// Call the model to create task for each element in the array
-		Student.SaveArrayOfTasks(JSON.stringify(array), (err, row) => {
-		  if(err) {
-			res.json(err)
-		  } else {
-			console.log(row)
-		  }
-		});
-	  }
-	  
-	  res.json(row);
+		req.body = {
+			Followup_Date: req.body.Followup_Date,
+			Student_Task_Id: req.body.Student_Task_Id,
+			Remark: req.body.Remark,
+			Task_Details: req.body.Task_Details,
+			Task_Group_Id: req.body.Task_Group_Id,
+			Student_Id: req.body.Student_Id,
+			Department_Id: req.body.Department_Id,
+			Department_Name: req.body.Department_Name,
+			To_User: req.body.To_User,
+			To_User_Name: req.body.To_User_Name,
+			Task_Status: req.body.Task_Status,
+			Status_Name: req.body.Status_Name,
+			Task_Item_Id: req.body.Task_Item_Id,
+			By_User_Id: req.body.By_User_Id,
+			By_User_Name: req.body.By_User_Name,
+			Branch_Id: req.body.Branch_Id,
+			Branch_Name: req.body.Branch_Name,
+			status: req.body.status,
+		}
+
+		// Check is there any task under status
+		// const [data] = await StatusTask.getByStatusId(req.body.status.Department_Status_Id)
+		const [data] = await StatusTask.getByStatusId(req.body.status.Department_Status_Id)
+		let row = [];
+
+		// Execute if there tasks under status
+		if (data && data.length) {
+			// Loop through the array
+			const array = data.map((element) => {
+				// Create a data object with the status task and data coming through body
+				const currentObj = {
+					...req.body,
+					Task_Details: element.description,
+					Department_Id: element.department_id,
+					Department_Name: element.Department_Name,
+					Status_Name: 'Pending',
+				}
+
+				// Push all of the objects an array
+				return currentObj;
+			})
+
+			// Call the model to create task for each element in the array
+			Student.SaveArrayOfTasks(JSON.stringify(array), (err, row) => {
+				if (err) {
+					res.json(err)
+				} else {
+					console.log(row)
+				}
+			});
+		}
+
+		res.json(row);
 	} catch (e) {
-	  res.json(e)
+		res.json(e)
 	} finally {
 	}
-  });
-
-
-
-router.post('/Save_CAS_NewTask_Followup_Navbar/',function(req,res,next)
-{ 
-try 
-{
- Student.Save_CAS_NewTask_Followup_Navbar(req.body, function (err, rows) 
-{
-if (err) 
-{
-
-res.json(err);
-}
-else 
-{
-res.json(rows);
-}
 });
-}
-catch (e) 
-{
 
-}
-finally 
-{
-}
+
+
+router.post('/Save_CAS_NewTask_Followup_Navbar/', function (req, res, next) {
+	try {
+		Student.Save_CAS_NewTask_Followup_Navbar(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
 });
-router.get('/getIntakeByCourse/:Course_Id_?',function(req,res,next)
- { 
- try 
- {
-	Student.getIntakeByCourse(req.params.Course_Id_, function (err, rows) 
- {
- if (err) 
- {
- res.json(err);
- }
- else 
- {
- res.json(rows);
- }
- });
- }
- catch (e) 
- {
- }
- finally 
- {
- }
- });
+router.get('/getIntakeByCourse/:Course_Id_?', function (req, res, next) {
+	try {
+		Student.getIntakeByCourse(req.params.Course_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
- router.get('/getIntakeByCountry/:Country_Id_?',function(req,res,next)
- { 
- try 
- {
-	Student.getIntakeByCountry(req.params.Country_Id_, function (err, rows) 
- {
- if (err) 
- {
- res.json(err);
- }
- else 
- {
- res.json(rows);
- }
- });
- }
- catch (e) 
- {
- }
- finally 
- {
- }
- });
+router.get('/getIntakeByCountry/:Country_Id_?', function (req, res, next) {
+	try {
+		Student.getIntakeByCountry(req.params.Country_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
-router.get('/Get_Tasknew_Task/:Student_Id_?/:Task_Group_Id_?/:Login_User_?',function(req,res,next)
-{ 
-try 
-{
-	   
-	Student.Get_Tasknew_Task(req.params.Student_Id_,req.params.Task_Group_Id_,req.params.Login_User_, function (err, rows) 
-{
- if (err) 
- {
-	
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
+router.get('/Get_Tasknew_Task/:Student_Id_?/:Task_Group_Id_?/:Login_User_?', function (req, res, next) {
+	try {
 
- router.get('/Delete_Tasknew/:Student_Task_Id?',function(req,res,next)
- { 
- try 
- {
-  Student.Delete_Tasknew(req.params.Student_Task_Id, function (err, rows) 
- {
-  if (err) 
-  {
- res.json(err);
-}
- else 
- {
- res.json(rows);
- }
- });
-  }
- catch (e) 
- {
- }
-finally 
- {
- }
-  });
- router.get("/Search_Application_List/:Fromdate_?/:Todate_?/:LoginUser_Id_?/:Course_Ids_?/:Country_Id_?/:University_Ids_?/:Intake_Id_?/:Intake_Year_Id_?/:Department_Status_Id_?/:To_User_Id_?/:Enrolled_Application_Only_View_Permission_?/:Pointer_Start_?/:Pointer_Stop_?/:Page_Length_?/:Is_View_?/:Department_Id_?/:search_name_?/:look_In_Date_Value?/:followup_user_selection?/:View_Type_?/:Entry_type_?/:search_application_no_?/:application_status_?/:Created_User_Id_?", function (req, res, next) {
-    try {
+		Student.Get_Tasknew_Task(req.params.Student_Id_, req.params.Task_Group_Id_, req.params.Login_User_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Delete_Tasknew/:Student_Task_Id?', function (req, res, next) {
+	try {
+		Student.Delete_Tasknew(req.params.Student_Task_Id, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+router.get("/Search_Application_List/:Fromdate_?/:Todate_?/:LoginUser_Id_?/:Course_Ids_?/:Country_Id_?/:University_Ids_?/:Intake_Id_?/:Intake_Year_Id_?/:Department_Status_Id_?/:To_User_Id_?/:Enrolled_Application_Only_View_Permission_?/:Pointer_Start_?/:Pointer_Stop_?/:Page_Length_?/:Is_View_?/:Department_Id_?/:search_name_?/:look_In_Date_Value?/:followup_user_selection?/:View_Type_?/:Entry_type_?/:search_application_no_?/:application_status_?/:Created_User_Id_?", function (req, res, next) {
+	try {
 		console.log(req.params)
-const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
+		const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
 		const universityIds = req.params.University_Ids_ ? req.params.University_Ids_.split(',').map(Number) : [];
 		console.log('universityIds: ', universityIds);
 
-        Student.Search_Application_List(req.params.Fromdate_,req.params.Todate_,req.params.LoginUser_Id_,
+		Student.Search_Application_List(req.params.Fromdate_, req.params.Todate_, req.params.LoginUser_Id_,
 			Course_Ids_,	// req.params.Course_Id_,
 			req.params.Country_Id_,
 			universityIds,// req.params.University_Id_,
-			req.params.Intake_Id_,req.params.Intake_Year_Id_,req.params.Department_Status_Id_,req.params.To_User_Id_,req.params.Enrolled_Application_Only_View_Permission_,req.params.Pointer_Start_,req.params.Pointer_Stop_,req.params.Page_Length_,req.params.Is_View_,req.params.Department_Id_,
-			req.params.search_name_,req.params.look_In_Date_Value,req.params.followup_user_selection,req.params.View_Type_ ,req.params.Entry_type_,req.params.search_application_no_,req.params.application_status_,req.params.Created_User_Id_,function (err, rows) {
-            if (err) {
-				console.log(err)
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
+			req.params.Intake_Id_, req.params.Intake_Year_Id_, req.params.Department_Status_Id_, req.params.To_User_Id_, req.params.Enrolled_Application_Only_View_Permission_, req.params.Pointer_Start_, req.params.Pointer_Stop_, req.params.Page_Length_, req.params.Is_View_, req.params.Department_Id_,
+			req.params.search_name_, req.params.look_In_Date_Value, req.params.followup_user_selection, req.params.View_Type_, req.params.Entry_type_, req.params.search_application_no_, req.params.application_status_, req.params.Created_User_Id_, function (err, rows) {
+				if (err) {
+					console.log(err)
+					res.json(err);
+				} else {
+					res.json(rows);
+				}
+			});
+	} catch (e) {
 
 		console.log(e)
-    } finally {
-    }
+	} finally {
+	}
 });
 
 router.get("/Search_Agent_Application_Report_old/:Fromdate_?/:Todate_?/:LoginUser_Id_?/:Course_Ids_?/:Country_Id_?/:University_Ids_?/:Intake_Id_?/:Intake_Year_Id_?/:Department_Status_Id_?/:Enrolled_Application_Only_View_Permission_?/:Pointer_Start_?/:Pointer_Stop_?/:Page_Length_?/:Is_View_?/:Department_Id_?/:search_name_?/:look_In_Date_Value?/:followup_user_selection?/:View_Type_?/:Entry_type_?/:search_application_no_?/:To_User_Id_?/:application_status_?/:Created_User_Id_?", function (req, res, next) {
-    try {
+	try {
 		console.log(req.params)
-const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
+		const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
 		const universityIds = req.params.University_Ids_ ? req.params.University_Ids_.split(',').map(Number) : [];
 		console.log('universityIds: ', universityIds);
 
-        Student.Search_Agent_Application_Report_old(req.params.Fromdate_,req.params.Todate_,req.params.LoginUser_Id_,
+		Student.Search_Agent_Application_Report_old(req.params.Fromdate_, req.params.Todate_, req.params.LoginUser_Id_,
 			Course_Ids_,	// req.params.Course_Id_,
 			req.params.Country_Id_,
 			universityIds,// req.params.University_Id_,
-			req.params.Intake_Id_,req.params.Intake_Year_Id_,req.params.Department_Status_Id_,req.params.Enrolled_Application_Only_View_Permission_,req.params.Pointer_Start_,req.params.Pointer_Stop_,req.params.Page_Length_,req.params.Is_View_,req.params.Department_Id_,
-			req.params.search_name_,req.params.look_In_Date_Value,req.params.followup_user_selection,req.params.View_Type_ ,req.params.Entry_type_,req.params.search_application_no_,req.params.To_User_Id_,req.params.application_status_,req.params.Created_User_Id_,function (err, rows) {
+			req.params.Intake_Id_, req.params.Intake_Year_Id_, req.params.Department_Status_Id_, req.params.Enrolled_Application_Only_View_Permission_, req.params.Pointer_Start_, req.params.Pointer_Stop_, req.params.Page_Length_, req.params.Is_View_, req.params.Department_Id_,
+			req.params.search_name_, req.params.look_In_Date_Value, req.params.followup_user_selection, req.params.View_Type_, req.params.Entry_type_, req.params.search_application_no_, req.params.To_User_Id_, req.params.application_status_, req.params.Created_User_Id_, function (err, rows) {
 				console.log('req.params.Created_User_Id_: ', req.params.Created_User_Id_);
-            if (err) {
-				console.log(err)
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
+				if (err) {
+					console.log(err)
+					res.json(err);
+				} else {
+					res.json(rows);
+				}
+			});
+	} catch (e) {
 
 		console.log(e)
-    } finally {
-    }
+	} finally {
+	}
 });
 
 router.get("/Search_Direct_Application_Report_new/:Fromdate_?/:Todate_?/:LoginUser_Id_?/:Course_Ids_?/:Country_Id_?/:University_Ids_?/:Intake_Id_?/:Intake_Year_Id_?/:Department_Status_Id_?/:Enrolled_Application_Only_View_Permission_?/:Pointer_Start_?/:Pointer_Stop_?/:Page_Length_?/:Is_View_?/:Department_Id_?/:search_name_?/:look_In_Date_Value?/:followup_user_selection?/:View_Type_?/:Entry_type_?/:search_application_no_?/:To_User_Id_?/:application_status_?", function (req, res, next) {
-    try {
+	try {
 		console.log(req.params)
-const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
+		const Course_Ids_ = req.params.Course_Ids_ ? req.params.Course_Ids_.split(',').map(Number) : [];
 		const universityIds = req.params.University_Ids_ ? req.params.University_Ids_.split(',').map(Number) : [];
 		console.log('universityIds: ', universityIds);
 
-        Student.Search_Direct_Application_Report_new(req.params.Fromdate_,req.params.Todate_,req.params.LoginUser_Id_,
+		Student.Search_Direct_Application_Report_new(req.params.Fromdate_, req.params.Todate_, req.params.LoginUser_Id_,
 			Course_Ids_,	// req.params.Course_Id_,
 			req.params.Country_Id_,
 			universityIds,// req.params.University_Id_,
-			req.params.Intake_Id_,req.params.Intake_Year_Id_,req.params.Department_Status_Id_,req.params.Enrolled_Application_Only_View_Permission_,req.params.Pointer_Start_,req.params.Pointer_Stop_,req.params.Page_Length_,req.params.Is_View_,req.params.Department_Id_,
-			req.params.search_name_,req.params.look_In_Date_Value,req.params.followup_user_selection,req.params.View_Type_ ,req.params.Entry_type_,req.params.search_application_no_,req.params.To_User_Id_,req.params.application_status_,function (err, rows) {
-            if (err) {
-				console.log(err)
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
+			req.params.Intake_Id_, req.params.Intake_Year_Id_, req.params.Department_Status_Id_, req.params.Enrolled_Application_Only_View_Permission_, req.params.Pointer_Start_, req.params.Pointer_Stop_, req.params.Page_Length_, req.params.Is_View_, req.params.Department_Id_,
+			req.params.search_name_, req.params.look_In_Date_Value, req.params.followup_user_selection, req.params.View_Type_, req.params.Entry_type_, req.params.search_application_no_, req.params.To_User_Id_, req.params.application_status_, function (err, rows) {
+				if (err) {
+					console.log(err)
+					res.json(err);
+				} else {
+					res.json(rows);
+				}
+			});
+	} catch (e) {
 
 		console.log(e)
-    } finally {
-    }
+	} finally {
+	}
 });
 router.get("/Load_Application_status_for_user/:Login_User_Id_?", function (req, res, next) {
 	try {
@@ -6703,32 +6354,25 @@ router.get("/Save_Application_Status/", function (req, res, next) {
 
 
 
-router.get('/Load_Color/',function(req,res,next)
-  { 
-  try 
-  {
-    Student.Load_Color(function (err, rows) 
-  {
-  if (err) 
-  {
-   
-  res.json(err);
-  }
-  else 
-  {
-  res.json(rows);
-  }
-  });
-  }
-  catch (e) 
-  {
-    
-  }
-  finally 
-  {
-  }
-  });
-  router.get("/Load_Automatic_Departments/", function (req, res, next) {
+router.get('/Load_Color/', function (req, res, next) {
+	try {
+		Student.Load_Color(function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+router.get("/Load_Automatic_Departments/", function (req, res, next) {
 	try {
 		Student.Load_Automatic_Departments(function (err, rows) {
 			if (err) {
@@ -6743,38 +6387,31 @@ router.get('/Load_Color/',function(req,res,next)
 });
 
 
-router.get('/Get_ToStaff_Student_DataCount/:Branch_?/:Followup_Date_?',function(req,res,next)
- { 
- try 
- {
-        
-     Student.Get_ToStaff_Student_DataCount(req.params.Branch_,req.params.Followup_Date_, function (err, rows) 
- {
-  if (err) 
-  {
-     
-  res.json(err);
-  }
-  else 
-  {
-    console.log(rows)
-    res.json(rows);
-
-  }
-  });
-  }
- catch (e) 
- {
-    
- }
- finally 
- {
- }
-  });
-
-  router.get("/Load_Application_status_forchangestatus/:Login_Id_?", function (req, res, next) {
+router.get('/Get_ToStaff_Student_DataCount/:Branch_?/:Followup_Date_?', function (req, res, next) {
 	try {
-		Student.Load_Application_status_forchangestatus(req.params.Login_Id_,function (err, rows) {
+
+		Student.Get_ToStaff_Student_DataCount(req.params.Branch_, req.params.Followup_Date_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				console.log(rows)
+				res.json(rows);
+
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+router.get("/Load_Application_status_forchangestatus/:Login_Id_?", function (req, res, next) {
+	try {
+		Student.Load_Application_status_forchangestatus(req.params.Login_Id_, function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -6786,66 +6423,55 @@ router.get('/Get_ToStaff_Student_DataCount/:Branch_?/:Followup_Date_?',function(
 	}
 });
 
-router.post('/Save_Lodgemet/',async function(req,res,next)
-      { 
-      try 
-      {
-      const resp=await Student.Save_Lodgemet(req.body);
-	
-	  console.log(resp);
-    
-	  return res.send(resp);
-      }
-      catch(e){
-        console.log(e)
-      return res.send(e);
-      
-      }
-      });
+router.post('/Save_Lodgemet/', async function (req, res, next) {
+	try {
+		const resp = await Student.Save_Lodgemet(req.body);
 
-	  router.post('/Save_Agent_Documents/',function(req,res,next)
-	  { 
-	  try 
-	  {
-	  Student.Save_Agent_Documents(req.body, function (err, rows) 
-	  {
-	  if (err) 
-	  {
-	  
-	  res.json(err);
-	  }
-	  else 
-	  {
-	  res.json(rows);
-	  }
-	  });
-	  }
-	  catch (e) 
-	  {
-	   }
-	  finally 
-	  {
-	  }
-	  });
+		console.log(resp);
+
+		return res.send(resp);
+	}
+	catch (e) {
+		console.log(e)
+		return res.send(e);
+
+	}
+});
+
+router.post('/Save_Agent_Documents/', function (req, res, next) {
+	try {
+		Student.Save_Agent_Documents(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
 
-	  router.post('/Save_Application_Change_User/',async function(req,res,next)
-      { 
-      try 
-      {
-      const resp=await Student.Save_Application_Change_User(req.body);
-	
-	  console.log(resp);
-    
-	  return res.send(resp);
-      }
-      catch(e){
-        console.log(e)
-      return res.send(e);
-      
-      }
-      });
+router.post('/Save_Application_Change_User/', async function (req, res, next) {
+	try {
+		const resp = await Student.Save_Application_Change_User(req.body);
+
+		console.log(resp);
+
+		return res.send(resp);
+	}
+	catch (e) {
+		console.log(e)
+		return res.send(e);
+
+	}
+});
 
 // router.get("/Save_Lodgemet/", function (req, res, next) {
 // 	try {
@@ -6876,209 +6502,8 @@ router.post('/Save_Lodgemet/',async function(req,res,next)
 
 
 router.get("/Load_Restriction_Status/", function (req, res, next) {
-    try {
-        Student.Load_Restriction_Status(function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-    } finally {
-    }
-});
-
-
-router.get("/Load_OfferLetter_Type/", function (req, res, next) {
-    try {
-        Student.Load_OfferLetter_Type(function (err, rows) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-    } finally {
-    }
-});
-
-
-
-router.get('/Load_Agents/',function(req,res,next)
-  { 
-  try 
-  {
-    Student.Load_Agents(function (err, rows) 
-  {
-  if (err) 
-  {
-   
-  res.json(err);
-  }
-  else 
-  {
-  res.json(rows);
-  }
-  });
-  }
-  catch (e) 
-  {
-    
-  }
-  finally 
-  {
-  }
-  });
-
-
-  router.post('/Save_Offerchasingdetails/',function(req,res,next)
-{
-try
-{
-Student.Save_Offerchasingdetails(req.body, function (err, rows)
-{
-if (err)
-{
-res.json(err);
-}
-else
-{
-  res.json(rows);
-}
-});
-}
-catch (e)
-{
-}
-finally
-{
-}
-});
-router.post('/Save_Student_Document', (req, res, next) =>
-{
-  try
-  {
-    const file = req.files
-    
-        var Image;
-        var Photo_ = [];
-    
-    if (!file) 
-    {
-    }
-    else
-    {
-      for (var i = 0; i < req.body.Document_File_Array; i++) 
-      {
-        if(i==req.body.ImageFile_Doc)
-		Image=file[i].filename; 
-      }
-    }
-      var Docs
-    console.log(req.body,'body')
-      Docs =
-      {   
-		"Student_Document_Id":req.body.Student_Document_Id,
-		"Student_Id": req.body.Student_Id,
-		"Image":Image,
-		"File_Name":req.body.File_Name,
-		"Description":req.body.Description,
-		"Document_Id":req.body.Document_Id,
-		"Document_Name":req.body.Document_Name
-      };
-
-      console.log(Docs,'route data')
-    var jsondata1 = JSON.stringify(Docs)
-    var Docs_Data=
-    {
-      "Docs_D": jsondata1,
-    };
-    Student.Save_Student_Document(Docs_Data, function (err, rows)
-        {
-         
-        if (err) 
-        {
-			console.log(err)
-          return 1;
-        }
-        else
-        {
-          return res.json(rows);
-        }
-      });
-    
-  }
-
-  catch (err) 
-  {
-    console.log(err)
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-    finally 
-    {
-    }
-  }
-);
-
-router.get('/Search_Conditions/:Application_details_Id_?',function(req,res,next)
-{ 
-try 
-{
-	Student.Search_Conditions(req.params.Application_details_Id_, function (err, rows) 
-
-{
- if (err) 
- {
- res.json(err);
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-}
-finally 
-{
-}
- });
-
- router.post('/Save_Viewconditions/',function(req,res,next)
- { 
- try 
- {
-	Student.Save_Viewconditions(req.body, function (err, rows) 
- {
-  if (err) 
-  {
-	
-  res.json(err);
-  }
-  else 
-  {
-    res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
-	
- }
- finally 
- {
- }
-  });
-
-
-  router.get("/Load_Application_status_forchangestatus_restriction/:Group_Restriction_?", function (req, res, next) {
 	try {
-		Student.Load_Application_status_forchangestatus_restriction(req.params.Group_Restriction_,function (err, rows) {
+		Student.Load_Restriction_Status(function (err, rows) {
 			if (err) {
 				res.json(err);
 			} else {
@@ -7091,133 +6516,267 @@ finally
 });
 
 
-router.post('/Save_DocumentName/',function(req,res,next)
-{ 
-try 
-{
-	Student.Save_DocumentName(req.body, function (err, rows) 
-{
- if (err) 
- {
- res.json(err);
- 
- }
- else 
- {
-   res.json(rows);
- }
- });
- }
-catch (e) 
-{
-  
-}
-finally 
-{
-}
- });
-
-
- router.get('/Search_DocumentName/',function(req,res,next)
- { 
- try 
- {
-	Student.Search_DocumentName(req.query.Document_Name, function (err, rows) 
- {
-  if (err) 
-  {
-   
-  res.json(err);
-  
-  }
-  else 
-  {
-	res.json(rows);
-  }
-  });
-  }
- catch (e) 
- {
- }
- finally 
- {
- }
-  });
-
-  router.get('/Delete_DocumentName/:Document_Id_?',function(req,res,next)
-  { 
-  try 
-  {
-	Student.Delete_DocumentName(req.params.Document_Id_, function (err, rows) 
-  {
-   if (err) 
-   {
-   res.json(err);
-   }
-   else 
-   {
-	 res.json(rows);
-   }
-   });
-   }
-  catch (e) 
-  {
-  }
-  finally 
-  {
-  }
-   });
-
-
-
-
-
-   router.post("/Student_duplicate_Import_Check/", function (req, res) {
-    try {
-        Student.Student_duplicate_Import_Check(req.body, function (err, rows) {
-            if (err) {
-                console.log(err);
-                res.json(err);
-            } else {
-                res.json(rows);
-            }
-        });
-    } catch (e) {
-    } finally {
-    }
+router.get("/Load_OfferLetter_Type/", function (req, res, next) {
+	try {
+		Student.Load_OfferLetter_Type(function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
 });
 
 
 
-router.get('/Get_ToStaff_Student_DataCount_Excel/:Branch_?/:Followup_Date_?/:Department_?',function(req,res,next)
- { 
- try 
- {
-        
-     Student.Get_ToStaff_Student_DataCount_Excel(req.params.Branch_,req.params.Followup_Date_,req.params.Department_, function (err, rows) 
- {
-  if (err) 
-  {
-     console.log(err)
-  res.json(err);
-  }
-  else 
-  {
-    console.log(rows)
-    res.json(rows);
+router.get('/Load_Agents/', function (req, res, next) {
+	try {
+		Student.Load_Agents(function (err, rows) {
+			if (err) {
 
-  }
-  });
-  }
- catch (e) 
- {
-    console.log(e)
- }
- finally 
- {
- }
-  });
-  router.get(
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+
+router.post('/Save_Offerchasingdetails/', function (req, res, next) {
+	try {
+		Student.Save_Offerchasingdetails(req.body, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+router.post('/Save_Student_Document', (req, res, next) => {
+	try {
+		const file = req.files
+
+		var Image;
+		var Photo_ = [];
+
+		if (!file) {
+		}
+		else {
+			for (var i = 0; i < req.body.Document_File_Array; i++) {
+				if (i == req.body.ImageFile_Doc)
+					Image = file[i].filename;
+			}
+		}
+		var Docs
+		console.log(req.body, 'body')
+		Docs =
+		{
+			"Student_Document_Id": req.body.Student_Document_Id,
+			"Student_Id": req.body.Student_Id,
+			"Image": Image,
+			"File_Name": req.body.File_Name,
+			"Description": req.body.Description,
+			"Document_Id": req.body.Document_Id,
+			"Document_Name": req.body.Document_Name
+		};
+
+		console.log(Docs, 'route data')
+		var jsondata1 = JSON.stringify(Docs)
+		var Docs_Data =
+		{
+			"Docs_D": jsondata1,
+		};
+		Student.Save_Student_Document(Docs_Data, function (err, rows) {
+
+			if (err) {
+				console.log(err)
+				return 1;
+			}
+			else {
+				return res.json(rows);
+			}
+		});
+
+	}
+
+	catch (err) {
+		console.log(err)
+		const error = new Error('Please upload a file')
+		error.httpStatusCode = 400
+		return next(error)
+	}
+	finally {
+	}
+}
+);
+
+router.get('/Search_Conditions/:Application_details_Id_?', function (req, res, next) {
+	try {
+		Student.Search_Conditions(req.params.Application_details_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.post('/Save_Viewconditions/', function (req, res, next) {
+	try {
+		Student.Save_Viewconditions(req.body, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+
+router.get("/Load_Application_status_forchangestatus_restriction/:Group_Restriction_?", function (req, res, next) {
+	try {
+		Student.Load_Application_status_forchangestatus_restriction(req.params.Group_Restriction_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
+});
+
+
+router.post('/Save_DocumentName/', function (req, res, next) {
+	try {
+		Student.Save_DocumentName(req.body, function (err, rows) {
+			if (err) {
+				res.json(err);
+
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+
+	}
+	finally {
+	}
+});
+
+
+router.get('/Search_DocumentName/', function (req, res, next) {
+	try {
+		Student.Search_DocumentName(req.query.Document_Name, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+router.get('/Delete_DocumentName/:Document_Id_?', function (req, res, next) {
+	try {
+		Student.Delete_DocumentName(req.params.Document_Id_, function (err, rows) {
+			if (err) {
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+
+
+
+
+router.post("/Student_duplicate_Import_Check/", function (req, res) {
+	try {
+		Student.Student_duplicate_Import_Check(req.body, function (err, rows) {
+			if (err) {
+				console.log(err);
+				res.json(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	} catch (e) {
+	} finally {
+	}
+});
+
+
+
+router.get('/Get_ToStaff_Student_DataCount_Excel/:Branch_?/:Followup_Date_?/:Department_?', function (req, res, next) {
+	try {
+
+		Student.Get_ToStaff_Student_DataCount_Excel(req.params.Branch_, req.params.Followup_Date_, req.params.Department_, function (err, rows) {
+			if (err) {
+				console.log(err)
+				res.json(err);
+			}
+			else {
+				console.log(rows)
+				res.json(rows);
+
+			}
+		});
+	}
+	catch (e) {
+		console.log(e)
+	}
+	finally {
+	}
+});
+router.get(
 	"/Search_EnquirywiseStatus_Summary/:Fromdate_?/:Todate_?/:By_User_?/:Login_User_Id_?/:look_In_Date_Value?/:Status_Id_?",
 	async function (req, res, next) {
 		var result = "";
@@ -7387,150 +6946,129 @@ router.get(
 );
 
 
-router.post('/Save_Payment_Tab_Details/',function(req,res,next)
-	{ 
-	try 
-		{
-		Student.Save_Payment_Tab_Details(req.body, function (err, rows) 
-			{
-			if (err) 
-				{
+router.post('/Save_Payment_Tab_Details/', function (req, res, next) {
+	try {
+		Student.Save_Payment_Tab_Details(req.body, function (err, rows) {
+			if (err) {
 
 				res.json(err);
-				}
-			else 
-				{
+			}
+			else {
 				res.json(rows);
-				}
-			});
-		}
-	catch (e) 
-		{
-
-		}
-	finally 
-		{
-		}
-	});
-
-router.get('/Get_Payment_Tab_Details/:Student_Id_?',function(req,res,next)
-		{ 
-		try 
-			{
-				
-				Student.Get_Payment_Tab_Details(req.params.Student_Id_, function (err, rows) 
-				{
-				if (err) 
-					{
-						
-					res.json(err);
-					}
-				else 
-					{
-					res.json(rows);
-					}
-				});
-			}
-		catch (e) 
-			{
-			}
-		finally 
-			{
 			}
 		});
+	}
+	catch (e) {
 
-	
-router.get('/Get_Enquiry_Source_Client_Id/:Enquiry_Id_?',function(req,res,next)
-		{ 
-			try 
-				{
-					
-					Student.Get_Enquiry_Source_Client_Id(req.params.Enquiry_Id_, function (err, rows) 
-				{
-				if (err) 
-					{
-						
-					res.json(err);
-					}
-				else 
-					{
-					res.json(rows);
-					}
-				});
-				}
-			catch (e) 
-				{
-				}
-			finally 
-				{
-				}
-		 });
+	}
+	finally {
+	}
+});
+
+router.get('/Get_Payment_Tab_Details/:Student_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Payment_Tab_Details(req.params.Student_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
+
+
+router.get('/Get_Enquiry_Source_Client_Id/:Enquiry_Id_?', function (req, res, next) {
+	try {
+
+		Student.Get_Enquiry_Source_Client_Id(req.params.Enquiry_Id_, function (err, rows) {
+			if (err) {
+
+				res.json(err);
+			}
+			else {
+				res.json(rows);
+			}
+		});
+	}
+	catch (e) {
+	}
+	finally {
+	}
+});
 
 
 router.get(
-    "/Search_Student_Report_Followup/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:Date_value_",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Student_Report_Followup(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Enquiry_Source_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Is_Old_Datas_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.remarks_,
-                req.params.To_User_,
-                req.params.Status_Id_,
-                req.params.Register_Value_,
+	"/Search_Student_Report_Followup/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Enquiry_Source_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Is_Old_Datas_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:remarks_?/:To_User_?/:Status_Id_?/:Register_Value_?/:Date_value_",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Student_Report_Followup(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Enquiry_Source_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Is_Old_Datas_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.remarks_,
+				req.params.To_User_,
+				req.params.Status_Id_,
+				req.params.Register_Value_,
 				req.params.Date_value_
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-            ;
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+			;
+		} finally {
+		}
+	}
 );
 
 
 
 router.get("/Search_Application_Data", async function (req, res, next) {
-    var result = "";
-    try {
-        result = await Student.Search_Application_Data(
-            req.query.Fromdate_,
-            req.query.Todate_,
-            req.query.Branch_,
-            req.query.By_User_,
-            req.query.Is_Date_Check_,
-            req.query.Login_User_Id_,
-            req.query.Status_Value_,
-            req.query.Agent_Id_,
-            req.query.Application_status_Id_,
-            req.query.Intake_Id_,
-            req.query.Intake_Year_Id_,
-            req.query.Country_Id_,
-            req.query.University_Id_,
-            req.query.Is_Active_Check_,
-        );
+	var result = "";
+	try {
+		result = await Student.Search_Application_Data(
+			req.query.Fromdate_,
+			req.query.Todate_,
+			req.query.Branch_,
+			req.query.By_User_,
+			req.query.Is_Date_Check_,
+			req.query.Login_User_Id_,
+			req.query.Status_Value_,
+			req.query.Agent_Id_,
+			req.query.Application_status_Id_,
+			req.query.Intake_Id_,
+			req.query.Intake_Year_Id_,
+			req.query.Country_Id_,
+			req.query.University_Id_,
+			req.query.Is_Active_Check_,
+		);
 
-        res.json(result);
-        console.log(result);
-    } catch (e) {
-        ;
-    } finally {
-    }
+		res.json(result);
+		console.log(result);
+	} catch (e) {
+		;
+	} finally {
+	}
 });
 router.get(
 	"/Student_Registration_Summary_Agent/:Fromdate_?/:Todate_?/:Branch_?/:Is_Date_Check_?/:Login_User_Id_?",
@@ -7553,32 +7091,32 @@ router.get(
 );
 
 router.get(
-    "/Search_Registration_Report_Agent/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Registration_Report_Agent(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.View_Branch_
-            );
+	"/Search_Registration_Report_Agent/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Registration_Report_Agent(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.View_Branch_
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 
@@ -7640,22 +7178,22 @@ router.get(
 );
 
 router.get(
-    "/Agent_Search_data_Details/:By_User_?/:Login_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Agent_Search_data_Details(
+	"/Agent_Search_data_Details/:By_User_?/:Login_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Agent_Search_data_Details(
 				req.params.By_User_,
 				req.params.Login_User_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
- 
+
 router.get(
 	"/View_Detail_agent_Details/:Department_?/:Branch_?/:By_User_?/:Login_User_Id_?/:File_Status_Value?",
 	async function (req, res, next) {
@@ -7665,7 +7203,7 @@ router.get(
 				req.params.Department_,
 				req.params.Branch_,
 				req.params.By_User_,
-				req.params.Login_User_Id_,req.params.File_Status_Value
+				req.params.Login_User_Id_, req.params.File_Status_Value
 			);
 			res.json(result);
 		} catch (e) {
@@ -7688,8 +7226,8 @@ router.get(
 
 			res.json(result);
 		} catch (e) {
-			
-		} finally {	
+
+		} finally {
 		}
 	}
 );
@@ -7714,32 +7252,32 @@ router.get(
 );
 
 router.get(
-    "/Search_Registration_Report_Freelancer/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?/:Freelancer_Manager_User_Id_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Search_Registration_Report_Freelancer(
-                req.params.Fromdate_,
-                req.params.Todate_,
-                req.params.Search_By_,
-                req.params.SearchbyName_,
-                req.params.Department_,
-                req.params.Branch_,
-                req.params.By_User_,
-                req.params.Is_Date_Check_,
-                req.params.Page_Index1_,
-                req.params.Page_Index2_,
-                req.params.Login_User_Id_,
-                req.params.RowCount,
-                req.params.RowCount2,
-                req.params.View_Branch_,req.params.Freelancer_Manager_User_Id_
-            );
+	"/Search_Registration_Report_Freelancer/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?/:View_Branch_?/:Freelancer_Manager_User_Id_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Search_Registration_Report_Freelancer(
+				req.params.Fromdate_,
+				req.params.Todate_,
+				req.params.Search_By_,
+				req.params.SearchbyName_,
+				req.params.Department_,
+				req.params.Branch_,
+				req.params.By_User_,
+				req.params.Is_Date_Check_,
+				req.params.Page_Index1_,
+				req.params.Page_Index2_,
+				req.params.Login_User_Id_,
+				req.params.RowCount,
+				req.params.RowCount2,
+				req.params.View_Branch_, req.params.Freelancer_Manager_User_Id_
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 router.get(
 	"/Search_Userwise_Summary_Freelancer/:Fromdate_?/:Todate_?/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:By_User_?/:Is_Date_Check_?/:Page_Index1_?/:Page_Index2_?/:Login_User_Id_?/:RowCount?/:RowCount2?",
@@ -7799,72 +7337,72 @@ router.get(
 );
 
 router.get(
-    "/Freelancer_Search_data_Details/:By_User_?/:Login_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Search_data_Details(
+	"/Freelancer_Search_data_Details/:By_User_?/:Login_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Search_data_Details(
 				req.params.By_User_,
 				req.params.Login_User_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 
 
 router.get(
-    "/Freelancer_Manager_Search_data_Details/:By_User_?/:Login_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Manager_Search_data_Details(
+	"/Freelancer_Manager_Search_data_Details/:By_User_?/:Login_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Manager_Search_data_Details(
 				req.params.By_User_,
 				req.params.Login_User_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 router.get(
-    "/Freelancer_Search_Amount_Details/:By_User_?/:Login_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Search_Amount_Details(
+	"/Freelancer_Search_Amount_Details/:By_User_?/:Login_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Search_Amount_Details(
 				req.params.By_User_,
 				req.params.Login_User_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 
 router.get(
-    "/Freelancer_Search_User_Amount/:By_User_?/:Login_User_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Search_User_Amount(
+	"/Freelancer_Search_User_Amount/:By_User_?/:Login_User_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Search_User_Amount(
 				req.params.By_User_,
 				req.params.Login_User_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
-        } finally {
-        }
-    }
+			res.json(result);
+		} catch (e) {
+		} finally {
+		}
+	}
 );
 router.get(
 	"/View_Detail_Freelancer_Details/:Search_By_?/:SearchbyName_?/:Department_?/:Branch_?/:To_User_?/:By_User_?/:Login_User_Id_?",
@@ -7885,7 +7423,7 @@ router.get(
 		} finally {
 		}
 	}
-	
+
 );
 
 
@@ -7929,22 +7467,22 @@ router.get(
 /** Added on 29-07-2024 */
 
 router.get(
-    "/Freelancer_Summary_Search_Sub_Page/:By_User_?/:Login_User_?/:Freelancer_Id_?",
-    async function (req, res, next) {
-        var result = "";
-        try {
-            result = await Student.Freelancer_Summary_Search_Sub_Page(
+	"/Freelancer_Summary_Search_Sub_Page/:By_User_?/:Login_User_?/:Freelancer_Id_?",
+	async function (req, res, next) {
+		var result = "";
+		try {
+			result = await Student.Freelancer_Summary_Search_Sub_Page(
 				req.params.By_User_,
 				req.params.Login_User_,
 				req.params.Freelancer_Id_,
-            );
+			);
 
-            res.json(result);
-        } catch (e) {
+			res.json(result);
+		} catch (e) {
 			console.log(e);
-        } finally {
-        }
-    }
+		} finally {
+		}
+	}
 );
 
 /*** Added on 31-07-2024 */
@@ -7973,7 +7511,7 @@ router.get(
 		} finally {
 		}
 	}
-	
+
 );
 
 /** Added on 19-11-2024 */
@@ -7983,7 +7521,7 @@ router.get(
 	async function (req, res, next) {
 		var result = "";
 		try {
-			result = await Student.Search_Intake_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_,req.params.Country_Id_ );
+			result = await Student.Search_Intake_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_, req.params.Country_Id_);
 			res.json(result);
 		} catch (e) {
 		} finally {
@@ -7996,7 +7534,7 @@ router.get(
 	async function (req, res, next) {
 		var result = "";
 		try {
-			result = await Student.Search_Agent_Summary_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_,req.params.Country_Id_,req.params.search_name_  );
+			result = await Student.Search_Agent_Summary_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_, req.params.Country_Id_, req.params.search_name_);
 			res.json(result);
 		} catch (e) {
 		} finally {
@@ -8009,7 +7547,7 @@ router.get(
 	async function (req, res, next) {
 		var result = "";
 		try {
-			result = await Student.Search_Freelancer_Summary_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_,req.params.Country_Id_,req.params.search_name_  );
+			result = await Student.Search_Freelancer_Summary_Report(req.params.Intake_Id, req.params.Intake_Year_Id, req.params.Login_User, req.params.View_Type_, req.params.Entry_Type_, req.params.UserType_Value_, req.params.Country_Id_, req.params.search_name_);
 			res.json(result);
 		} catch (e) {
 		} finally {
@@ -8018,29 +7556,27 @@ router.get(
 );
 
 /** Added on 20-11-2024 */
-router.get('/Get_Intake_Count/',function(req,res,next)
-{ 
-try 
-{Student.Get_Intake_Count(function (err, rows)  
-{
-if (err) {res.json(err);}
-else {res.json(rows);}});
-}
-catch (e) {}
-finally {}
+router.get('/Get_Intake_Count/', function (req, res, next) {
+	try {
+		Student.Get_Intake_Count(function (err, rows) {
+			if (err) { res.json(err); }
+			else { res.json(rows); }
+		});
+	}
+	catch (e) { }
+	finally { }
 });
 
 
-router.get('/Get_Intake_Data_With_Count_Greater_Than_Zero/',function(req,res,next)
-{ 
-try 
-{Student.Get_Intake_Data_With_Count_Greater_Than_Zero(function (err, rows)  
-{
-if (err) {res.json(err);}
-else {res.json(rows);}});
-}
-catch (e) {}
-finally {}
+router.get('/Get_Intake_Data_With_Count_Greater_Than_Zero/', function (req, res, next) {
+	try {
+		Student.Get_Intake_Data_With_Count_Greater_Than_Zero(function (err, rows) {
+			if (err) { res.json(err); }
+			else { res.json(rows); }
+		});
+	}
+	catch (e) { }
+	finally { }
 });
 
 
